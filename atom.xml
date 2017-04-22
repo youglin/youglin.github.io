@@ -34,12 +34,14 @@
     <link href="http://yoursite.com/2017/04/22/haha/"/>
     <id>http://yoursite.com/2017/04/22/haha/</id>
     <published>2017-04-22T13:46:31.000Z</published>
-    <updated>2017-04-22T13:46:31.796Z</updated>
+    <updated>2017-04-22T16:39:47.462Z</updated>
     
     <summary type="html">
     
     </summary>
     
+    
+      <category term="1" scheme="http://yoursite.com/tags/1/"/>
     
   </entry>
   
@@ -48,7 +50,7 @@
     <link href="http://yoursite.com/2017/04/22/%E6%96%B0%E6%96%87%E7%AB%A0/"/>
     <id>http://yoursite.com/2017/04/22/新文章/</id>
     <published>2017-04-22T10:34:23.000Z</published>
-    <updated>2017-04-22T12:36:18.257Z</updated>
+    <updated>2017-04-22T16:34:31.679Z</updated>
     
     <content type="html"><![CDATA[<h1 id="欢迎使用-Cmd-Markdown-编辑阅读器"><a href="#欢迎使用-Cmd-Markdown-编辑阅读器" class="headerlink" title="欢迎使用 Cmd Markdown 编辑阅读器"></a>欢迎使用 Cmd Markdown 编辑阅读器</h1><hr>
 <p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
@@ -70,6 +72,8 @@
     
     </summary>
     
+    
+      <category term="article" scheme="http://yoursite.com/tags/article/"/>
     
   </entry>
   
