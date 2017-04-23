@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[blog]]></title>
+      <url>%2F2017%2F04%2F23%2Fblog%2F</url>
+      <content type="text"></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[test_file]]></title>
       <url>%2F2017%2F04%2F22%2Ftest-file%2F</url>
       <content type="text"></content>
@@ -10,7 +17,7 @@
 
     
     <entry>
-      <title><![CDATA[haha]]></title>
+      <title><![CDATA[测试文章]]></title>
       <url>%2F2017%2F04%2F22%2Fhaha%2F</url>
       <content type="text"></content>
     </entry>
