@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-23T07:56:49.469Z</updated>
+  <updated>2017-04-23T09:38:28.726Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,46 +16,16 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>blog</title>
-    <link href="http://yoursite.com/2017/04/23/blog/"/>
-    <id>http://yoursite.com/2017/04/23/blog/</id>
-    <published>2017-04-23T07:56:49.000Z</published>
-    <updated>2017-04-23T07:56:49.469Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>test_filaaaaaaaaaa</title>
+    <title>test_fil</title>
     <link href="http://yoursite.com/2017/04/22/test-file/"/>
     <id>http://yoursite.com/2017/04/22/test-file/</id>
     <published>2017-04-22T15:15:29.000Z</published>
-    <updated>2017-04-23T08:50:00.215Z</updated>
+    <updated>2017-04-23T09:38:28.726Z</updated>
     
     <summary type="html">
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>测试文章</title>
-    <link href="http://yoursite.com/2017/04/22/haha/"/>
-    <id>http://yoursite.com/2017/04/22/haha/</id>
-    <published>2017-04-22T13:46:31.000Z</published>
-    <updated>2017-04-23T07:47:08.019Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-      <category term="article" scheme="http://yoursite.com/tags/article/"/>
     
   </entry>
   

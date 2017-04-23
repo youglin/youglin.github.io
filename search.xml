@@ -3,22 +3,8 @@
   
     
     <entry>
-      <title><![CDATA[blog]]></title>
-      <url>%2F2017%2F04%2F23%2Fblog%2F</url>
-      <content type="text"></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[test_filaaaaaaaaaa]]></title>
+      <title><![CDATA[test_fil]]></title>
       <url>%2F2017%2F04%2F22%2Ftest-file%2F</url>
-      <content type="text"></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[测试文章]]></title>
-      <url>%2F2017%2F04%2F22%2Fhaha%2F</url>
       <content type="text"></content>
     </entry>
 
