@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-25T10:41:12.663Z</updated>
+  <updated>2017-04-25T10:45:00.259Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/04/22/test-file/"/>
     <id>http://yoursite.com/2017/04/22/test-file/</id>
     <published>2017-04-22T15:15:29.000Z</published>
-    <updated>2017-04-25T10:41:12.663Z</updated>
+    <updated>2017-04-25T10:45:00.259Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>——关于为什么搭建个人博客<br>　　很多人都用过QQ空间和微博，虽然它们可以满足我们发表日志、照片等动态的需求，但是其界面基本大同小异。而个人博客则可以由我们自身个性化地行搭建装饰，你可以在上面诉说你的生活琐事，也可以发表你对行业的独特见解。作为想要立志在互联网行业拼搏的人，博客的搭建是你对所学知识应用的开始，而运营博客则体现一个人的水平及修养。</p>
 <hr>
@@ -31,7 +31,7 @@
 <blockquote>
 <p><strong>2.从配置Github开始</strong></p>
 </blockquote>
-<p>　　首先注册或登录<a href="https://github.com，记住自己的用户名，之后点击右上角Create" target="_blank" rel="external">https://github.com，记住自己的用户名，之后点击右上角Create</a> a new repository，<img src="/img/1.png" alt=""><br>　　配置生成自己仓库，其中yourname.github.io就是你的博客域名，例如我的域名是<a href="http://github.com/youglin" target="_blank" rel="external">http://github.com/youglin</a><br>　　<img src="/img/4.jpg" alt=""></p>
+<p>　　首先注册或登录github.com，记住自己的用户名，之后点击右上角Create a new repository，<img src="/img/1.png" alt=""><br>　　配置生成自己仓库，其中yourname.github.io就是你的博客域名，例如我的域名是<a href="http://github.com/youglin" target="_blank" rel="external">http://github.com/youglin</a><br>　　<img src="/img/4.jpg" alt=""></p>
 <blockquote>
 <p><strong>3.环境安装（node.js、git bash和文本编辑器）</strong></p>
 </blockquote>
