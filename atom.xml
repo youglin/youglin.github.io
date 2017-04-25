@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-23T09:38:28.726Z</updated>
+  <updated>2017-04-25T02:35:14.790Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,13 +16,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test_fil</title>
+    <title></title>
     <link href="http://yoursite.com/2017/04/22/test-file/"/>
     <id>http://yoursite.com/2017/04/22/test-file/</id>
     <published>2017-04-22T15:15:29.000Z</published>
-    <updated>2017-04-23T09:38:28.726Z</updated>
+    <updated>2017-04-25T02:35:14.790Z</updated>
+    
+    <content type="html"><![CDATA[<p>###前言<br>——关于为什么搭建个人博客<br>　　很多人都用过QQ空间和微博，虽然它们可以满足我们发表日志、照片等动态的需求，但是其界面基本大同小异。而个人博客则可以由我们自身个性化地行搭建装饰，你可以在上面诉说你的生活琐事，也可以发表你对行业的独特见解。作为想要立志在互联网行业拼搏的人，博客的搭建是你对所学知识应用的开始，而运营博客则体现一个人的水平及修养。</p>
+<hr>
+<p>预期效果可参考<a href="http://www.yourglin.cn" target="_blank" rel="external">本人博客</a></p>
+<hr>
+<p>###步骤说明</p>
+<blockquote>
+<p>1.什么是Hexo?</p>
+</blockquote>
+<p>　　Hexo是一个开源的静态博客生成器,用node.js开发,作者是台湾大学生tommy。Hexo 使用Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
+　　</p>
+<blockquote>
+<p>2.从配置Github开始</p>
+</blockquote>
+<p>　　首先注册或登录<a href="https://github.com/" target="_blank" rel="external">Github官网</a>，记住自己的用户名，之后点击右上角Create a new repository(<a href="https://github.com/new).配置生成自己仓库，其中yourname.github.io就是你的博客域名，例如我的域名是http://github.com/youglin" target="_blank" rel="external">https://github.com/new).配置生成自己仓库，其中yourname.github.io就是你的博客域名，例如我的域名是http://github.com/youglin</a>
+　　</p>
+<blockquote>
+<p>3.环境安装（node.js和git桌面版）</p>
+</blockquote>
+]]></content>
     
     <summary type="html">
+    
+      &lt;p&gt;###前言&lt;br&gt;——关于为什么搭建个人博客&lt;br&gt;　　很多人都用过QQ空间和微博，虽然它们可以满足我们发表日志、照片等动态的需求，但是其界面基本大同小异。而个人博客则可以由我们自身个性化地行搭建装饰，你可以在上面诉说你的生活琐事，也可以发表你对行业的独特见解。作为想要立志
     
     </summary>
     
