@@ -85,9 +85,6 @@
 
 
 
-  <meta property="fb:admins" content="" />
-  <meta property="fb:app_id" content="" />
-
 
 
 <meta name="description" content="Hello, this is Mr_林先生">
@@ -145,24 +142,6 @@
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/zh_Hans/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
 
 
 
@@ -384,12 +363,7 @@
           
   <div class="comments" id="comments">
     
-      <div class="fb-comments"
-           data-href="http://yoursite.com/tags/index.html"
-           data-numposts="10"
-           data-width="100%"
-           data-colorscheme="light">
-      </div>
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
     
   </div>
 
@@ -641,26 +615,6 @@
 
   
 
-
-  
-
-    
-      <script id="dsq-count-scr" src="https://yourlin.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/tags/index.html';
-          this.page.identifier = 'tags/index.html';
-          this.page.title = '测试1';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://yourlin.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
 
   
 
