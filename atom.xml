@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-01T01:29:42.954Z</updated>
+  <updated>2017-05-01T01:34:10.754Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,10 +20,9 @@
     <link href="http://yoursite.com/2017/05/01/article2/"/>
     <id>http://yoursite.com/2017/05/01/article2/</id>
     <published>2017-05-01T01:26:00.000Z</published>
-    <updated>2017-05-01T01:29:42.954Z</updated>
+    <updated>2017-05-01T01:34:10.754Z</updated>
     
-    <content type="html"><![CDATA[<p>###1.函数调用</p>
-<p>　　首先需要从函数的调用开始讲起。</p>
+    <content type="html"><![CDATA[<h3 id="1-函数调用"><a href="#1-函数调用" class="headerlink" title="1.函数调用"></a>1.函数调用</h3><p>　　首先需要从函数的调用开始讲起。</p>
 <p>JS（ES5）里面有三种函数调用形式：</p>
 <pre><code>func(p1, p2)
 obj.child.method(p1, p2)
@@ -164,12 +163,9 @@ console.log( bar.a );// 2
     
     <summary type="html">
     
-      &lt;p&gt;###1.函数调用&lt;/p&gt;
-&lt;p&gt;　　首先需要从函数的调用开始讲起。&lt;/p&gt;
+      &lt;h3 id=&quot;1-函数调用&quot;&gt;&lt;a href=&quot;#1-函数调用&quot; class=&quot;headerlink&quot; title=&quot;1.函数调用&quot;&gt;&lt;/a&gt;1.函数调用&lt;/h3&gt;&lt;p&gt;　　首先需要从函数的调用开始讲起。&lt;/p&gt;
 &lt;p&gt;JS（ES5）里面有三种函数调用形式：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;func(p1, p2)
-obj.child.method(p1, p2)
-func.call(context, p1,
+&lt;pre&gt;
     
     </summary>
     
