@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="1.函数调用　　首先需要从函数的调用开始讲起。 JS（ES5）里面有三种函数调用形式： func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 apply 　　前面两种是常见的形式，其实后一种才是正常调用形式： func.call(context, p1, p2) 　　前两种可以等价地变为 call 形式： f">
+<meta name="description" content="1.函数调用　　首先需要从函数的调用开始讲起。 JS（ES5）里面有三种函数调用形式： func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 apply 　　前面两种是常见的形式，其实后一种才是正常调用形式： func.call(context, p1, p2)">
 <meta name="keywords" content="article">
 <meta property="og:type" content="article">
 <meta property="og:title" content="this的值是什么">
 <meta property="og:url" content="http://yoursite.com/2017/05/01/article2/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="1.函数调用　　首先需要从函数的调用开始讲起。 JS（ES5）里面有三种函数调用形式： func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 apply 　　前面两种是常见的形式，其实后一种才是正常调用形式： func.call(context, p1, p2) 　　前两种可以等价地变为 call 形式： f">
-<meta property="og:updated_time" content="2017-05-01T01:36:47.298Z">
+<meta property="og:description" content="1.函数调用　　首先需要从函数的调用开始讲起。 JS（ES5）里面有三种函数调用形式： func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 apply 　　前面两种是常见的形式，其实后一种才是正常调用形式： func.call(context, p1, p2)">
+<meta property="og:updated_time" content="2017-05-01T01:41:06.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="this的值是什么">
-<meta name="twitter:description" content="1.函数调用　　首先需要从函数的调用开始讲起。 JS（ES5）里面有三种函数调用形式： func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 apply 　　前面两种是常见的形式，其实后一种才是正常调用形式： func.call(context, p1, p2) 　　前两种可以等价地变为 call 形式： f">
+<meta name="twitter:description" content="1.函数调用　　首先需要从函数的调用开始讲起。 JS（ES5）里面有三种函数调用形式： func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 apply 　　前面两种是常见的形式，其实后一种才是正常调用形式： func.call(context, p1, p2)">
 
 
 
@@ -443,7 +443,8 @@ obj.child.method(p1, p2)
 func.call(context, p1, p2) // 先不讲 apply
 </code></pre><p>　　前面两种是常见的形式，其实后一种才是正常调用形式：</p>
 <pre><code>func.call(context, p1, p2)
-</code></pre><p>　　前两种可以等价地变为 call 形式：</p>
+</code></pre><a id="more"></a>
+<p>　　前两种可以等价地变为 call 形式：</p>
 <pre><code>func(p1, p2) 等价于
 func.call(undefined, p1, p2)
 
@@ -748,7 +749,7 @@ console.log( bar.a );// 2
             
             
             <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
+              <a href="/tags/index-2.html">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">标签</span>
               </a>

@@ -425,146 +425,21 @@
 
       
         
-          
-            <h3 id="1-函数调用"><a href="#1-函数调用" class="headerlink" title="1.函数调用"></a>1.函数调用</h3><p>　　首先需要从函数的调用开始讲起。</p>
+          <h3 id="1-函数调用"><a href="#1-函数调用" class="headerlink" title="1.函数调用"></a>1.函数调用</h3><p>　　首先需要从函数的调用开始讲起。</p>
 <p>JS（ES5）里面有三种函数调用形式：</p>
 <pre><code>func(p1, p2)
 obj.child.method(p1, p2)
 func.call(context, p1, p2) // 先不讲 apply
 </code></pre><p>　　前面两种是常见的形式，其实后一种才是正常调用形式：</p>
 <pre><code>func.call(context, p1, p2)
-</code></pre><p>　　前两种可以等价地变为 call 形式：</p>
-<pre><code>func(p1, p2) 等价于
-func.call(undefined, p1, p2)
-
-obj.child.method(p1, p2) 等价于
-obj.child.method.call(obj.child, p1, p2)
-</code></pre><p>　　请记下来。（我们称此代码为「转换代码」，方便下文引用）</p>
-<p>　　至此我们的函数调用只有一种形式：</p>
-<pre><code>func.call(context, p1, p2)
-</code></pre><p>　　这样，this 就好解释了–this，就是上面代码中的 context。就这么简单。</p>
-<p>　　先看 func(p1, p2) 中的 this 如何确定：</p>
-<p>　　当你写下面代码时</p>
-<pre><code>function func(){
-  console.log(this)
-}
-
-func()等价于：
-
-function func(){
-  console.log(this)
-}
-
- func.call(undefined) // 可以简写为 func.call()
-</code></pre><p>　　按理说打印出来的 this 应该就是 undefined 了吧，但是浏览器里有一条规则：</p>
-<p>　　如果你传的 context 就 null 或者 undefined，那么 window 对象就是默认的 context（严格模式下默认 context 是 undefined）<br>　　因此上面的打印结果是 window。</p>
-<p>　　如果你希望这里的 this 不是 window，很简单：</p>
-<p>func.call(obj) // 那么里面的 this 就是 obj 对象了</p>
-<p>再看 obj.child.method(p1, p2) 的 this 如何确定</p>
-<pre><code>var obj = {
-  foo: function(){
-console.log(this)
-  }
-}
-
-obj.foo()
-</code></pre><p>按照「转换代码」，我们将 obj.foo() 转换为</p>
-<pre><code>obj.foo.call(obj)
-</code></pre><p>好了，this 就是 obj。搞定。</p>
-<p>回到题目：</p>
-<pre><code>var obj = {
-  foo: function(){
-    console.log(this)
-  }
-}
-
-var bar = obj.foo
-obj.foo() // 转换为obj.foo.call(obj)，this 就是 obj
-
-bar()
-// 转换为 bar.call()
-// 由于没有传 context
-// 所以 this 就是 undefined
-// 最后浏览器给你一个默认的 this —— window 对象
-</code></pre><p>[ ] 语法</p>
-<pre><code>function fn (){ console.log(this) }
-var arr = [fn, fn2]
-arr[0]() // 这里面的 this 又是什么呢？
-</code></pre><p>　　我们可以把 arr<a href="">0</a> 想象为arr.0( )，虽然后者的语法错了，但是形式与转换代码里的 obj.child.method(p1, p2) 对应上了，于是就可以愉快的转换了：</p>
-<p>  arr<a href="">0</a>，假想为    arr.0()<br>然后转换为 arr.0.call(arr)<br>那么里面的 this 就是 arr 了 :) </p>
-<p>总结</p>
-<p>　　this 就是你 call 一个函数时，传入的 context。<br>　　如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。</p>
-<h3 id="2-this机制的四种规则"><a href="#2-this机制的四种规则" class="headerlink" title="2.this机制的四种规则"></a>2.this机制的四种规则</h3><p>　　this到底绑定或者引用的是哪个对象环境决定于函数被调用的地方。而函数的调用有不同的方式，在不同的方式中调用决定this引用的是哪个对象是由四种规则确定的。我们一个个来看。<br>　　<br>2.1 默认绑定全局变量</p>
-<p>　　这条规则是最常见的，也是默认的。当函数被单独定义和调用的时候，应用的规则就是绑定全局变量。如下：</p>
-<pre><code>function fn() {
-console.log( this.a );
-}
-var a = 2;
-fn(); // 2 -- fn单独调用，this引用window
-</code></pre><p>2.2 隐式绑定</p>
-<p>　　隐式调用的意思是，函数调用时拥有一个上下文对象，就好像这个函数是属于该对象的一样。例如：</p>
-<pre><code>function fn() {
-console.log( this.a );
-}
-var obj = {
-a: 2,
-fn: fn
-};
-obj.fn(); // 2 -- this引用obj。
-</code></pre><p>　　需要说明的一点是，最后一个调用该函数的对象是传到函数的上下文对象（绕懵了）。如：</p>
-<pre><code>function fn() {
-console.log( this.a );
-}
-var obj2 = {
-a: 42,
-fn: fn
-};
-var obj1 = {
-a: 2,
-obj2: obj2
-};
-obj1.obj2.fn(); // 42 -- this引用的是obj2.
-</code></pre><p>　　还有一点要说明的是，失去隐式绑定的情况，如下：</p>
-<pre><code>function fn() {
-console.log( this.a );
-}
-var obj = {
-a: 2,
-fn: fn
-};
-var bar = obj.fn; // 函数引用传递
-var a = &quot;全局&quot;; // 定义全局变量
-bar(); // &quot;全局&quot;
-</code></pre><p>　　如上，第8行虽然有隐式绑定，但是它执行的效果明显是把fn赋给bar。这样bar执行的时候，依然是默认绑定全局变量，所以输出结果如上。</p>
-<p>2.3 显示绑定</p>
-<p>　　学过bind()\apply()\call()函数的都应该知道，它接收的第一个参数即是上下文对象并将其赋给this。看下面的例子：</p>
-<pre><code>function fn() {
-console.log( this.a );
-}
-var obj = {
-a: 2
-};
-fn.call( obj ); // 2
-</code></pre><p>　　如果我们传递第一个值为简单值，那么后台会自动转换为对应的封装对象。如果传递为null，那么结果就是在绑定默认全局变量，如：</p>
-<pre><code>function fn() {
- console.log( this.a );
-}
-var obj = {
- a: 2
-};
-var a = 10;
-fn.call( null); // 10
-</code></pre><p>2.4 new新对象绑定</p>
-<p>　　如果是一个构造函数，那么用new来调用，那么绑定的将是新创建的对象。如：</p>
-<pre><code>function fn(a) {
-this.a = a;
-}
-var bar = new fn( 2 );
-console.log( bar.a );// 2
-</code></pre><p>　　注意，一般构造函数名首字母大写，这里没有大写的原因是想提醒读者，构造函数也是一般的函数而已。
-　</p>
-
-          
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/01/article2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -935,7 +810,7 @@ console.log( bar.a );// 2
             
             
             <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
+              <a href="/tags/index-2.html">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">标签</span>
               </a>
