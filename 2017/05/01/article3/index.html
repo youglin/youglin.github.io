@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/01/article3/index.html">
 <meta property="og:site_name" content="朝花夕拾">
 <meta property="og:description" content="###1.从作用域讲起　　js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。 　　注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。 ###2.闭包定义　　闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义">
-<meta property="og:updated_time" content="2017-05-01T14:02:51.818Z">
+<meta property="og:updated_time" content="2017-05-01T14:07:26.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="闭包">
 <meta name="twitter:description" content="###1.从作用域讲起　　js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。 　　注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。 ###2.闭包定义　　闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义">
@@ -461,19 +461,8 @@
         <p>###1.从作用域讲起<br>　　js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。</p>
 <p>　　注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。</p>
 <p>###2.闭包定义<br>　　闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义了一些本地变量，当该函数被调用时，仍可以使用这些本地变量。</p>
-<p>###3.闭包(函数)的两种基本类型<br>　　(1)作为值从函数返回的函数就是闭包函数<br>　　例如：闭包函数A()位于一个特定的环境中（即函数B()中），并作为值从函数B()返回：</p>
-<pre><code>function B()
-{
-    var temp = &quot;abc&quot;; //本地变量
-   function A() //闭包函数
-  {
-    alert(&quot;闭包函数处理本地变量temp的值：&quot; + temp);
-  }
-    return A; //返回闭包函数
-}
-    var myFunc = B(); //调用函数B()，返回的是闭包函数A()
-    myFunc(); //调用闭包函数A(),结果返回&quot;闭包函数处理本地变量temp的值：abc&quot;
-</code></pre><p>　　分析：myFunc()调用是在函数B()外边，按照规定，它不应该再返回到本地变量temp，但实际上仍可以访问到，这就是闭包函数的作用。</p>
+<p>###3.闭包(函数)的两种基本类型<br>　　(1)作为值从函数返回的函数就是闭包函数<br>　　例如：闭包函数A()位于一个特定的环境中（即函数B()中），并作为值从函数B()返回：<br><a id="more"></a><br>    function B()<br>    {<br>        var temp = “abc”; //本地变量<br>       function A() //闭包函数<br>      {<br>        alert(“闭包函数处理本地变量temp的值：” + temp);<br>      }<br>        return A; //返回闭包函数<br>    }<br>        var myFunc = B(); //调用函数B()，返回的是闭包函数A()<br>        myFunc(); //调用闭包函数A(),结果返回”闭包函数处理本地变量temp的值：abc”</p>
+<p>　　分析：myFunc()调用是在函数B()外边，按照规定，它不应该再返回到本地变量temp，但实际上仍可以访问到，这就是闭包函数的作用。</p>
 <p>　　(2)利用变量作用范围也可以形成闭包函数<br>　　　一般来讲，作为参数传递给函数的函数或作为值从函数返回的函数都是闭包函数。同时，利用变量作用范围也可以形成闭包函数，例如“</p>
 <pre><code>var F;
 function B()
@@ -667,7 +656,7 @@ F(); //调用闭包函数F()
             
             
             <div class="site-state-item site-state-tags">
-              <a href="/tags/index-2.html">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>

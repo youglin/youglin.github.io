@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-01T14:02:51.818Z</updated>
+  <updated>2017-05-01T14:07:26.656Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,24 +20,13 @@
     <link href="http://yoursite.com/2017/05/01/article3/"/>
     <id>http://yoursite.com/2017/05/01/article3/</id>
     <published>2017-05-01T13:58:50.000Z</published>
-    <updated>2017-05-01T14:02:51.818Z</updated>
+    <updated>2017-05-01T14:07:26.656Z</updated>
     
     <content type="html"><![CDATA[<p>###1.从作用域讲起<br>　　js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。</p>
 <p>　　注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。</p>
 <p>###2.闭包定义<br>　　闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义了一些本地变量，当该函数被调用时，仍可以使用这些本地变量。</p>
-<p>###3.闭包(函数)的两种基本类型<br>　　(1)作为值从函数返回的函数就是闭包函数<br>　　例如：闭包函数A()位于一个特定的环境中（即函数B()中），并作为值从函数B()返回：</p>
-<pre><code>function B()
-{
-    var temp = &quot;abc&quot;; //本地变量
-   function A() //闭包函数
-  {
-    alert(&quot;闭包函数处理本地变量temp的值：&quot; + temp);
-  }
-    return A; //返回闭包函数
-}
-    var myFunc = B(); //调用函数B()，返回的是闭包函数A()
-    myFunc(); //调用闭包函数A(),结果返回&quot;闭包函数处理本地变量temp的值：abc&quot;
-</code></pre><p>　　分析：myFunc()调用是在函数B()外边，按照规定，它不应该再返回到本地变量temp，但实际上仍可以访问到，这就是闭包函数的作用。</p>
+<p>###3.闭包(函数)的两种基本类型<br>　　(1)作为值从函数返回的函数就是闭包函数<br>　　例如：闭包函数A()位于一个特定的环境中（即函数B()中），并作为值从函数B()返回：<br><a id="more"></a><br>    function B()<br>    {<br>        var temp = “abc”; //本地变量<br>       function A() //闭包函数<br>      {<br>        alert(“闭包函数处理本地变量temp的值：” + temp);<br>      }<br>        return A; //返回闭包函数<br>    }<br>        var myFunc = B(); //调用函数B()，返回的是闭包函数A()<br>        myFunc(); //调用闭包函数A(),结果返回”闭包函数处理本地变量temp的值：abc”</p>
+<p>　　分析：myFunc()调用是在函数B()外边，按照规定，它不应该再返回到本地变量temp，但实际上仍可以访问到，这就是闭包函数的作用。</p>
 <p>　　(2)利用变量作用范围也可以形成闭包函数<br>　　　一般来讲，作为参数传递给函数的函数或作为值从函数返回的函数都是闭包函数。同时，利用变量作用范围也可以形成闭包函数，例如“</p>
 <pre><code>var F;
 function B()
@@ -61,7 +50,9 @@ F(); //调用闭包函数F()
     <summary type="html">
     
       &lt;p&gt;###1.从作用域讲起&lt;br&gt;　　js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。&lt;/p&gt;
-&lt;p&gt;　　注意：在函数内部声明变量时，一定要使用var命令。
+&lt;p&gt;　　注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。&lt;/p&gt;
+&lt;p&gt;###2.闭包定义&lt;br&gt;　　闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义了一些本地变量，当该函数被调用时，仍可以使用这些本地变量。&lt;/p&gt;
+&lt;p&gt;###3.闭包(函数)的两种基本类型&lt;br&gt;　　(1)作为值从函数返回的函数就是闭包函数&lt;br&gt;　　例如：闭包函数A()位于一个特定的环境中（即函数B()中），并作为值从函数B()返回：&lt;br&gt;
     
     </summary>
     
@@ -244,7 +235,7 @@ func.call(context, p1, p2) // 先不讲 apply
     <link href="http://yoursite.com/2017/04/22/article1/"/>
     <id>http://yoursite.com/2017/04/22/article1/</id>
     <published>2017-04-22T15:15:29.000Z</published>
-    <updated>2017-04-25T10:45:00.259Z</updated>
+    <updated>2017-05-01T14:08:25.621Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>——关于为什么搭建个人博客<br>　　很多人都用过QQ空间和微博，虽然它们可以满足我们发表日志、照片等动态的需求，但是其界面基本大同小异。而个人博客则可以由我们自身个性化地行搭建装饰，你可以在上面诉说你的生活琐事，也可以发表你对行业的独特见解。作为想要立志在互联网行业拼搏的人，博客的搭建是你对所学知识应用的开始，而运营博客则体现一个人的水平及修养。</p>
 <hr>
@@ -382,7 +373,7 @@ INFO  Copying files from public folder...
     </summary>
     
     
-      <category term="article" scheme="http://yoursite.com/tags/article/"/>
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
     
   </entry>
   
