@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Javscript," />
+  <meta name="keywords" content="web安全," />
 
 
 
@@ -87,17 +87,20 @@
 
 
 
-<meta name="description" content="1.从作用域讲起　　js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。 　　注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。 2.闭包定义　　闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义了一些本地变">
-<meta name="keywords" content="Javscript">
+<meta name="description" content="1.定义　XSS，即跨站脚本攻击。指攻击者在web页面中插入恶意的脚本代码，当用户浏览该页时，嵌入web里面的脚本代码被执行，从而达到攻击者的目的。　　看一个简单的跨站脚本攻击范例：　　以下代码使用ASP.NET接收一个传送的参数，并将其显示出来： &amp;lt;%@Page Language=&amp;quot;C#&amp;quot; ResponseEncoding=&amp;quot;utf-8&amp;quot; Valid">
+<meta name="keywords" content="web安全">
 <meta property="og:type" content="article">
-<meta property="og:title" content="闭包">
-<meta property="og:url" content="http://yoursite.com/2017/05/01/article3/index.html">
+<meta property="og:title" content="跨站脚本攻击（XSS)">
+<meta property="og:url" content="http://yoursite.com/2017/05/03/article4/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="1.从作用域讲起　　js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。 　　注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。 2.闭包定义　　闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义了一些本地变">
-<meta property="og:updated_time" content="2017-05-01T14:15:14.338Z">
+<meta property="og:description" content="1.定义　XSS，即跨站脚本攻击。指攻击者在web页面中插入恶意的脚本代码，当用户浏览该页时，嵌入web里面的脚本代码被执行，从而达到攻击者的目的。　　看一个简单的跨站脚本攻击范例：　　以下代码使用ASP.NET接收一个传送的参数，并将其显示出来： &amp;lt;%@Page Language=&amp;quot;C#&amp;quot; ResponseEncoding=&amp;quot;utf-8&amp;quot; Valid">
+<meta property="og:image" content="http://yoursite.com/img/6.jpg">
+<meta property="og:image" content="http://yoursite.com/img/7.png">
+<meta property="og:updated_time" content="2017-05-03T13:35:08.021Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="闭包">
-<meta name="twitter:description" content="1.从作用域讲起　　js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。 　　注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。 2.闭包定义　　闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义了一些本地变">
+<meta name="twitter:title" content="跨站脚本攻击（XSS)">
+<meta name="twitter:description" content="1.定义　XSS，即跨站脚本攻击。指攻击者在web页面中插入恶意的脚本代码，当用户浏览该页时，嵌入web里面的脚本代码被执行，从而达到攻击者的目的。　　看一个简单的跨站脚本攻击范例：　　以下代码使用ASP.NET接收一个传送的参数，并将其显示出来： &amp;lt;%@Page Language=&amp;quot;C#&amp;quot; ResponseEncoding=&amp;quot;utf-8&amp;quot; Valid">
+<meta name="twitter:image" content="http://yoursite.com/img/6.jpg">
 
 
 
@@ -125,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/01/article3/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/03/article4/"/>
 
 
 
 
 
-  <title> 闭包 | 朝花夕拾 </title>
+  <title> 跨站脚本攻击（XSS) | 朝花夕拾 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -338,7 +341,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/article3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/03/article4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林优钢">
@@ -359,7 +362,7 @@
             
             
               
-                闭包
+                跨站脚本攻击（XSS)
               
             
           </h1>
@@ -374,8 +377,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T21:58:50+08:00">
-                2017-05-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-03T21:33:43+08:00">
+                2017-05-03
               </time>
             
 
@@ -385,28 +388,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web前端/" itemprop="url" rel="index">
-                    <span itemprop="name">web前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -415,7 +396,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/05/01/article3/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/05/03/article4/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -424,7 +405,7 @@
 
           
           
-             <span id="/2017/05/01/article3/" class="leancloud_visitors" data-flag-title="闭包">
+             <span id="/2017/05/03/article4/" class="leancloud_visitors" data-flag-title="跨站脚本攻击（XSS)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -458,28 +439,19 @@
       
 
       
-        <h3 id="1-从作用域讲起"><a href="#1-从作用域讲起" class="headerlink" title="1.从作用域讲起"></a>1.从作用域讲起</h3><p>　　js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。</p>
-<p>　　注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。</p>
-<h3 id="2-闭包定义"><a href="#2-闭包定义" class="headerlink" title="2.闭包定义"></a>2.闭包定义</h3><p>　　闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义了一些本地变量，当该函数被调用时，仍可以使用这些本地变量。</p>
-<h3 id="3-闭包-函数-的两种基本类型"><a href="#3-闭包-函数-的两种基本类型" class="headerlink" title="3.闭包(函数)的两种基本类型"></a>3.闭包(函数)的两种基本类型</h3><p>　　(1)作为值从函数返回的函数就是闭包函数<br>　　例如：闭包函数A()位于一个特定的环境中（即函数B()中），并作为值从函数B()返回：<br><a id="more"></a><br>    function B()<br>    {<br>        var temp = “abc”; //本地变量<br>       function A() //闭包函数<br>      {<br>        alert(“闭包函数处理本地变量temp的值：” + temp);<br>      }<br>        return A; //返回闭包函数<br>    }<br>        var myFunc = B(); //调用函数B()，返回的是闭包函数A()<br>        myFunc(); //调用闭包函数A(),结果返回”闭包函数处理本地变量temp的值：abc”</p>
-<p>　　分析：myFunc()调用是在函数B()外边，按照规定，它不应该再返回到本地变量temp，但实际上仍可以访问到，这就是闭包函数的作用。</p>
-<p>　　(2)利用变量作用范围也可以形成闭包函数<br>　　　一般来讲，作为参数传递给函数的函数或作为值从函数返回的函数都是闭包函数。同时，利用变量作用范围也可以形成闭包函数，例如“</p>
-<pre><code>var F;
-function B()
-{
-  var temp = &quot;abc&quot;;
-  F = function()
-  {
-    alert(&quot;闭包函数处理本地变量temp的值：&quot; + temp);
-  }
-}
-B(); //调用函数B()为变量F赋值；
-F(); //调用闭包函数F()
-</code></pre><p>　　分析，闭包函数F()的调用虽不在函数B()的局部作用范围内，但仍可以访问到temp。<br>　　注意：自由变量跨作用域取值时，要去创建这个函数的作用域取值，而不是“父作用域”。（其他篇章再分析）
+        <h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h3><p>　XSS，即跨站脚本攻击。指攻击者在web页面中插入恶意的脚本代码，当用户浏览该页时，嵌入web里面的脚本代码被执行，从而达到攻击者的目的。<br>　　看一个简单的跨站脚本攻击范例：<br>　　以下代码使用ASP.NET接收一个传送的参数，并将其显示出来：</p>
+<pre><code>&lt;%@Page Language=&quot;C#&quot; ResponseEncoding=&quot;utf-8&quot; ValidateRequest=&quot;False&quot;%&gt;
+&lt;%
+ string scriptSring = Request.QueryString[0];
+ Response.Write(scriptString);
+ %&gt;
+</code></pre><p>　　这是一个简单的动态网页，正常情况下没有问题，但如果有恶意者使用下面的网址请求：<br><a id="more"></a><br>    <a href="http://localhost/test.aspx?" target="_blank" rel="external">http://localhost/test.aspx?</a><script>alert(“hi!XSS is here”);</script><br>　　则页面会出现：<br>　　<img src="/img/6.jpg" alt=""><br>　　由于没有对输入的请求进行验证就进行了输出，从而会执行客户端脚本代码。如果某个地址是别人通过“骗你”单击一个连接发起的，并且客户端脚本代码是用来获取你的会话和Cookie的，那么你的信息就被窃取并被提交到攻击者的web站点，从而被非法利用。
 　　</p>
-<h3 id="4-闭包函数的总结"><a href="#4-闭包函数的总结" class="headerlink" title="4.闭包函数的总结"></a>4.闭包函数的总结</h3><p>　　(1)用处：一是可以读取函数内部的变量，二是可以让这些变量的值始终保持在内存中，不会让其被调用后被自动清除。<br>　　关于第二个用处的解释：B()是A()的父函数，而A()被赋给了一个全局变量，这导致A()始终在内存中，而A()的存在依赖于B()，因此B()也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。</p>
-<p>　　(2)缺点：一是内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。<br>　　二是闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。
+<h3 id="2-XSS的攻击方式"><a href="#2-XSS的攻击方式" class="headerlink" title="2.XSS的攻击方式"></a>2.XSS的攻击方式</h3><p>(1).反射型<br>　　发出请求时，XSS代码出现在URL中，作为输入提交到服务器端，服务器端解析后响应，XSS代码随响应内容一起传回给浏览器，最后浏览器解析执行XSS代码。此过程像一次反射，故叫反射型CSS。<br>　<br>(2).存储型<br>　　存储型XSS和反射型XSS差别仅在于，提交的代码会存储在服务器端（数据库，内存，文件系统等），下次请求目标页面时不用再提交XSS代码。
 　　</p>
+<h3 id="3-如何防范XSS"><a href="#3-如何防范XSS" class="headerlink" title="3.如何防范XSS"></a>3.如何防范XSS</h3><p>　　<br>　　XSS的防御方法，只要有以下三种：<br>(1).编码<br>　　将输入的字符进行转义，需要引入ecode.js库。<br>　　<img src="/img/7.png" alt=""><br>(2)过滤（客户端）：<br>　　移除用户上传的DOM属性，如onerror、onclick、onmouseout等；<br>　　移除用户上传的Style节点、Script节点、Iframe节点等。因为style可以控制页面显示形式，而script可以引入js文件，iframe可以引入外部资源、易植入广告、连接等；<br>　　同时，服务器端也要有过滤。例如ASP.NET应用服务器就提供了这种功能。在ASP.NET网页中，用户可以使用@Page指令的ValidateRequest属性来设置是否开启氢气验证，默认开启。例如在文章首部的攻击范例中可改为</p>
+<pre><code>&lt;%@Page Language=&quot;C#&quot;ResponseEncoding=&quot;utf-8&quot;ValidateRequest=&quot;True&quot;%&gt;.
+</code></pre><p>(3)校正<br>　　避免直接对HTML Entity解码<br>　　使用DOM Parse转换，校正不配对的DOM标签</p>
 
       
     </div>
@@ -525,7 +497,7 @@ F(); //调用闭包函数F()
       
         <div class="post-tags">
           
-            <a href="/tags/Javscript/" rel="tag"># Javscript</a>
+            <a href="/tags/web安全/" rel="tag"># web安全</a>
           
         </div>
       
@@ -538,18 +510,14 @@ F(); //调用闭包函数F()
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/03/article4/" rel="next" title="跨站脚本攻击（XSS)">
-                <i class="fa fa-chevron-left"></i> 跨站脚本攻击（XSS)
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/01/article2/" rel="prev" title="this的值是什么">
-                this的值是什么 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/01/article3/" rel="prev" title="闭包">
+                闭包 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -725,7 +693,7 @@ F(); //调用闭包函数F()
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-从作用域讲起"><span class="nav-number">1.</span> <span class="nav-text">1.从作用域讲起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-闭包定义"><span class="nav-number">2.</span> <span class="nav-text">2.闭包定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-闭包-函数-的两种基本类型"><span class="nav-number">3.</span> <span class="nav-text">3.闭包(函数)的两种基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-闭包函数的总结"><span class="nav-number">4.</span> <span class="nav-text">4.闭包函数的总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-定义"><span class="nav-number">1.</span> <span class="nav-text">1.定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-XSS的攻击方式"><span class="nav-number">2.</span> <span class="nav-text">2.XSS的攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-如何防范XSS"><span class="nav-number">3.</span> <span class="nav-text">3.如何防范XSS</span></a></li></ol></div>
             
 
           </div>
