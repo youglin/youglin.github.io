@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Javscript," />
+  <meta name="keywords" content="缓存," />
 
 
 
@@ -87,17 +87,20 @@
 
 
 
-<meta name="description" content="1.函数调用　　首先需要从函数的调用开始讲起。 JS（ES5）里面有三种函数调用形式： func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 apply 　　前面两种是常见的形式，其实后一种才是正常调用形式： func.call(context, p1, p2)">
-<meta name="keywords" content="Javscript">
+<meta name="description" content="浏览器缓存机制，主要可以分为两大类。一是HTTP协议定义的缓存机制；二是非HTTP协议定义的缓存机制。下面以Pragma为例先说下后者。 一、Pragma（非HTTP协议定义的）　　　Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签（而且可能还得做些hack放到body后面去）： &amp;lt;meta http-equiv=&amp;quot;Pragma&amp;quo">
+<meta name="keywords" content="缓存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="this的值是什么">
-<meta property="og:url" content="http://yoursite.com/2017/05/01/article2/index.html">
+<meta property="og:title" content="浏览器缓存机制">
+<meta property="og:url" content="http://yoursite.com/2017/05/20/article7/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="1.函数调用　　首先需要从函数的调用开始讲起。 JS（ES5）里面有三种函数调用形式： func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 apply 　　前面两种是常见的形式，其实后一种才是正常调用形式： func.call(context, p1, p2)">
-<meta property="og:updated_time" content="2017-05-01T14:03:32.958Z">
+<meta property="og:description" content="浏览器缓存机制，主要可以分为两大类。一是HTTP协议定义的缓存机制；二是非HTTP协议定义的缓存机制。下面以Pragma为例先说下后者。 一、Pragma（非HTTP协议定义的）　　　Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签（而且可能还得做些hack放到body后面去）： &amp;lt;meta http-equiv=&amp;quot;Pragma&amp;quo">
+<meta property="og:image" content="http://yoursite.com/img/6.1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/6.2.jpg">
+<meta property="og:updated_time" content="2017-05-20T14:19:09.568Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="this的值是什么">
-<meta name="twitter:description" content="1.函数调用　　首先需要从函数的调用开始讲起。 JS（ES5）里面有三种函数调用形式： func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 apply 　　前面两种是常见的形式，其实后一种才是正常调用形式： func.call(context, p1, p2)">
+<meta name="twitter:title" content="浏览器缓存机制">
+<meta name="twitter:description" content="浏览器缓存机制，主要可以分为两大类。一是HTTP协议定义的缓存机制；二是非HTTP协议定义的缓存机制。下面以Pragma为例先说下后者。 一、Pragma（非HTTP协议定义的）　　　Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签（而且可能还得做些hack放到body后面去）： &amp;lt;meta http-equiv=&amp;quot;Pragma&amp;quo">
+<meta name="twitter:image" content="http://yoursite.com/img/6.1.jpg">
 
 
 
@@ -125,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/01/article2/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/20/article7/"/>
 
 
 
 
 
-  <title> this的值是什么 | 朝花夕拾 </title>
+  <title> 浏览器缓存机制 | 朝花夕拾 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -328,7 +331,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/article2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/20/article7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="林友钢">
@@ -349,7 +352,7 @@
             
             
               
-                this的值是什么
+                浏览器缓存机制
               
             
           </h1>
@@ -364,8 +367,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T09:26:00+08:00">
-                2017-05-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T22:17:33+08:00">
+                2017-05-20
               </time>
             
 
@@ -387,8 +390,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web前端/" itemprop="url" rel="index">
-                    <span itemprop="name">web前端</span>
+                  <a href="/categories/浏览器/" itemprop="url" rel="index">
+                    <span itemprop="name">浏览器</span>
                   </a>
                 </span>
 
@@ -405,7 +408,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/05/01/article2/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/05/20/article7/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -414,7 +417,7 @@
 
           
           
-             <span id="/2017/05/01/article2/" class="leancloud_visitors" data-flag-title="this的值是什么">
+             <span id="/2017/05/20/article7/" class="leancloud_visitors" data-flag-title="浏览器缓存机制">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -448,144 +451,23 @@
       
 
       
-        <h3 id="1-函数调用"><a href="#1-函数调用" class="headerlink" title="1.函数调用"></a>1.函数调用</h3><p>　　首先需要从函数的调用开始讲起。</p>
-<p>JS（ES5）里面有三种函数调用形式：</p>
-<pre><code>func(p1, p2)
-obj.child.method(p1, p2)
-func.call(context, p1, p2) // 先不讲 apply
-</code></pre><p>　　前面两种是常见的形式，其实后一种才是正常调用形式：</p>
-<pre><code>func.call(context, p1, p2)
-</code></pre><a id="more"></a>
-<p>　　前两种可以等价地变为 call 形式：</p>
-<pre><code>func(p1, p2) 等价于
-func.call(undefined, p1, p2)
+        <p>浏览器缓存机制，主要可以分为两大类。一是HTTP协议定义的缓存机制；二是非HTTP协议定义的缓存机制。下面以Pragma为例先说下后者。</p>
+<p>一、Pragma（非HTTP协议定义的）<br>　<br>　　Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签（而且可能还得做些hack放到body后面去）：</p>
+<pre><code>&lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot;&gt;
+</code></pre><p>　　“no-cache”命令即告诉浏览器每次请求时都不要读缓存，都要向服务器发一次请求。<br>　　<a id="more"></a><br>　　局限性：1. 仅有IE才能识别这段meta标签含义，其它主流浏览器仅能识别“Cache-Control: no-store”的meta标签（见出处）。<br>　　2. 在IE中识别到该meta标签含义，并不一定会在请求字段加上Pragma，但的确会让当前页面每次都发新请求（仅限页面，页面上的资源则不受影响）。</p>
+<p>二.HTTP协议定义的缓存机制</p>
+<p> 1.Expires<br>　Pragma用来禁用缓存，而Expires则是用来启用缓存和定义缓存时间首部字段。<br>　　同样在客户端我们可以使用meta标签来知会IE（也仅有IE能识别）页面（同样也只对页面有效，对页面上的资源无效）缓存时间：</p>
+<pre><code>&lt;meta http-equiv=&quot;expires&quot; content=&quot;mon, 18 apr 2016 14:30:00 GMT&quot;&gt;
 
-obj.child.method(p1, p2) 等价于
-obj.child.method.call(obj.child, p1, p2)
-</code></pre><p>　　请记下来。（我们称此代码为「转换代码」，方便下文引用）</p>
-<p>　　至此我们的函数调用只有一种形式：</p>
-<pre><code>func.call(context, p1, p2)
-</code></pre><p>　　这样，this 就好解释了–this，就是上面代码中的 context。就这么简单。</p>
-<p>　　先看 func(p1, p2) 中的 this 如何确定：</p>
-<p>　　当你写下面代码时</p>
-<pre><code>function func(){
-  console.log(this)
-}
-
-func()等价于：
-
-function func(){
-  console.log(this)
-}
-
- func.call(undefined) // 可以简写为 func.call()
-</code></pre><p>　　按理说打印出来的 this 应该就是 undefined 了吧，但是浏览器里有一条规则：</p>
-<p>　　如果你传的 context 就 null 或者 undefined，那么 window 对象就是默认的 context（严格模式下默认 context 是 undefined）<br>　　因此上面的打印结果是 window。</p>
-<p>　　如果你希望这里的 this 不是 window，很简单：</p>
-<p>func.call(obj) // 那么里面的 this 就是 obj 对象了</p>
-<p>再看 obj.child.method(p1, p2) 的 this 如何确定</p>
-<pre><code>var obj = {
-  foo: function(){
-console.log(this)
-  }
-}
-
-obj.foo()
-</code></pre><p>按照「转换代码」，我们将 obj.foo() 转换为</p>
-<pre><code>obj.foo.call(obj)
-</code></pre><p>好了，this 就是 obj。搞定。</p>
-<p>回到题目：</p>
-<pre><code>var obj = {
-  foo: function(){
-    console.log(this)
-  }
-}
-
-var bar = obj.foo
-obj.foo() // 转换为obj.foo.call(obj)，this 就是 obj
-
-bar()
-// 转换为 bar.call()
-// 由于没有传 context
-// 所以 this 就是 undefined
-// 最后浏览器给你一个默认的 this —— window 对象
-</code></pre><p>[ ] 语法</p>
-<pre><code>function fn (){ console.log(this) }
-var arr = [fn, fn2]
-arr[0]() // 这里面的 this 又是什么呢？
-</code></pre><p>　　我们可以把 arr<a href="">0</a> 想象为arr.0( )，虽然后者的语法错了，但是形式与转换代码里的 obj.child.method(p1, p2) 对应上了，于是就可以愉快的转换了：</p>
-<p>  arr<a href="">0</a>，假想为    arr.0()<br>然后转换为 arr.0.call(arr)<br>那么里面的 this 就是 arr 了 :) </p>
-<p>总结</p>
-<p>　　this 就是你 call 一个函数时，传入的 context。<br>　　如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。</p>
-<h3 id="2-this机制的四种规则"><a href="#2-this机制的四种规则" class="headerlink" title="2.this机制的四种规则"></a>2.this机制的四种规则</h3><p>　　this到底绑定或者引用的是哪个对象环境决定于函数被调用的地方。而函数的调用有不同的方式，在不同的方式中调用决定this引用的是哪个对象是由四种规则确定的。我们一个个来看。<br>　　<br>2.1 默认绑定全局变量</p>
-<p>　　这条规则是最常见的，也是默认的。当函数被单独定义和调用的时候，应用的规则就是绑定全局变量。如下：</p>
-<pre><code>function fn() {
-console.log( this.a );
-}
-var a = 2;
-fn(); // 2 -- fn单独调用，this引用window
-</code></pre><p>2.2 隐式绑定</p>
-<p>　　隐式调用的意思是，函数调用时拥有一个上下文对象，就好像这个函数是属于该对象的一样。例如：</p>
-<pre><code>function fn() {
-console.log( this.a );
-}
-var obj = {
-a: 2,
-fn: fn
-};
-obj.fn(); // 2 -- this引用obj。
-</code></pre><p>　　需要说明的一点是，最后一个调用该函数的对象是传到函数的上下文对象（绕懵了）。如：</p>
-<pre><code>function fn() {
-console.log( this.a );
-}
-var obj2 = {
-a: 42,
-fn: fn
-};
-var obj1 = {
-a: 2,
-obj2: obj2
-};
-obj1.obj2.fn(); // 42 -- this引用的是obj2.
-</code></pre><p>　　还有一点要说明的是，失去隐式绑定的情况，如下：</p>
-<pre><code>function fn() {
-console.log( this.a );
-}
-var obj = {
-a: 2,
-fn: fn
-};
-var bar = obj.fn; // 函数引用传递
-var a = &quot;全局&quot;; // 定义全局变量
-bar(); // &quot;全局&quot;
-</code></pre><p>　　如上，第8行虽然有隐式绑定，但是它执行的效果明显是把fn赋给bar。这样bar执行的时候，依然是默认绑定全局变量，所以输出结果如上。</p>
-<p>2.3 显示绑定</p>
-<p>　　学过bind()\apply()\call()函数的都应该知道，它接收的第一个参数即是上下文对象并将其赋给this。看下面的例子：</p>
-<pre><code>function fn() {
-console.log( this.a );
-}
-var obj = {
-a: 2
-};
-fn.call( obj ); // 2
-</code></pre><p>　　如果我们传递第一个值为简单值，那么后台会自动转换为对应的封装对象。如果传递为null，那么结果就是在绑定默认全局变量，如：</p>
-<pre><code>function fn() {
- console.log( this.a );
-}
-var obj = {
- a: 2
-};
-var a = 10;
-fn.call( null); // 10
-</code></pre><p>2.4 new新对象绑定</p>
-<p>　　如果是一个构造函数，那么用new来调用，那么绑定的将是新创建的对象。如：</p>
-<pre><code>function fn(a) {
-this.a = a;
-}
-var bar = new fn( 2 );
-console.log( bar.a );// 2
-</code></pre><p>　　注意，一般构造函数名首字母大写，这里没有大写的原因是想提醒读者，构造函数也是一般的函数而已。
-　</p>
+（取消缓存只需将content的值设为-1或0）
+</code></pre><p>　　<br>　　局限性：Expires 是HTTP 1.0的东西，现在默认浏览器均默认使用HTTP 1.1，所以它的作用基本忽略。<br>　　<br>　　注意：<br>　　优先级：Pragma&gt;Expires<br>　　<br>2.Cache-Control<br>　因为Expires的时间是相对服务器来说的，无法保证和客户端时间统一。HTTP1.1推出了新的通用首部字母Cache-Control来定义缓存过期时间。</p>
+<p>　　为了让服务器检验客户端现在存有的缓存文件是否跟其一样（以免因资源重复而浪费带宽），Http1.1新增了几个首部字段：<br>　　<br>2.1.Last-Modified<br>　服务器将资源传递给客户端时，会将资源最后更改的时间以“Last-Modified: GMT”的形式加在实体首部上一起返回给客户端。Last-Modified的值有两个：<br>　(1) If-Modified-Since：<br>　　该请求首部告诉服务器如果客户端传来的最后修改时间与服务器上的一致，则直接回送304 和响应报头即可。<br>　　当前各浏览器均是使用的该请求首部来向服务器传递保存的 Last-Modified 值。<br>　　<br>　(2) If-Unmodified-Since：<br>　　告诉服务器，若Last-Modified没有匹配上（资源在服务端的最后更新时间改变了），则应当返回412(Precondition Failed) 状态码给客户端<br>　　<br>　　Last-Modified的局限性：如果在服务器上，一个资源被修改了，但其实际内容根本没发生改变，会因为Last-Modified时间匹配不上而返回了整个实体给客户端（即使客户端缓存里有个一模一样的资源）。<br>　　<br>2.2.ETag<br>　为了解决上述Last-Modified可能存在的不准确的问题，Http1.1还推出了 ETag 实体首部字段。ETag值有两个：</p>
+<p>⑴ If-None-Matchf:<br>　告诉服务端如果 ETag 没匹配上需要重发资源数据，否则直接回送304 和响应报头即可。<br>　　当前各浏览器均是使用的该请求首部来向服务器传递保存的 ETag 值。<br>　　<br>(2)If-Match:<br>　告诉服务器如果没有匹配到ETag，或者收到了“*”值而当前并没有该资源实体，则应当返回412(Precondition Failed) 状态码给客户端。否则服务器直接忽略该字段。<br>　　If-Match的一个应用场景是，客户端走PUT方法向服务端请求上传/更替资源，这时候可以通过 If-Match 传递资源的ETag。<br>　　<br>三、有Last-Modified为什么还要Etag？<br>　l. Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间<br>　２. 如果某些文件会被定期生成，当有时内容并没有任何变化，但Last-Modified却改变了，导致文件没法使用缓存<br>　３.有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形</p>
+<p>Etag是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。Last-Modified与ETag是可以一起使用的，服务器会优先验证ETag，一致的情况下，才会继续比对Last-Modified，最后才决定是否返回304。</p>
+<p>###总结###</p>
+<p>浏览器第一次请求：<br><img src="/img/6.1.jpg" alt=""></p>
+<p>浏览器再次请求时：<br><img src="/img/6.2.jpg" alt=""></p>
+<p>参考文章：<br>　　1.作者：吴秦<br>　　 出处：<a href="http://www.cnblogs.com/skynet/" target="_blank" rel="external">http://www.cnblogs.com/skynet/</a><br>　　 2.作者：VaJoy Larn<br>　　 出处：www.cnblogs.com/vajoy/p/5341664.html </p>
 
       
     </div>
@@ -631,7 +513,7 @@ console.log( bar.a );// 2
       
         <div class="post-tags">
           
-            <a href="/tags/Javscript/" rel="tag"># Javscript</a>
+            <a href="/tags/缓存/" rel="tag"># 缓存</a>
           
         </div>
       
@@ -644,18 +526,14 @@ console.log( bar.a );// 2
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/01/article3/" rel="next" title="闭包">
-                <i class="fa fa-chevron-left"></i> 闭包
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/22/article1/" rel="prev" title="如何用Hexo和Github搭建个人博客">
-                如何用Hexo和Github搭建个人博客 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/05/article5/" rel="prev" title="HTTP协议（转载）">
+                HTTP协议（转载） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -728,17 +606,8 @@ console.log( bar.a );// 2
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -821,22 +690,6 @@ console.log( bar.a );// 2
   <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=702060845&auto=0&height=430"></iframe>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-函数调用"><span class="nav-number">1.</span> <span class="nav-text">1.函数调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-this机制的四种规则"><span class="nav-number">2.</span> <span class="nav-text">2.this机制的四种规则</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

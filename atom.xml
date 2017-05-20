@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-05T15:04:40.055Z</updated>
+  <updated>2017-05-20T14:19:09.568Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浏览器缓存机制</title>
+    <link href="http://yoursite.com/2017/05/20/article7/"/>
+    <id>http://yoursite.com/2017/05/20/article7/</id>
+    <published>2017-05-20T14:17:33.000Z</published>
+    <updated>2017-05-20T14:19:09.568Z</updated>
+    
+    <content type="html"><![CDATA[<p>浏览器缓存机制，主要可以分为两大类。一是HTTP协议定义的缓存机制；二是非HTTP协议定义的缓存机制。下面以Pragma为例先说下后者。</p>
+<p>一、Pragma（非HTTP协议定义的）<br>　<br>　　Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签（而且可能还得做些hack放到body后面去）：</p>
+<pre><code>&lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot;&gt;
+</code></pre><p>　　“no-cache”命令即告诉浏览器每次请求时都不要读缓存，都要向服务器发一次请求。<br>　　<a id="more"></a><br>　　局限性：1. 仅有IE才能识别这段meta标签含义，其它主流浏览器仅能识别“Cache-Control: no-store”的meta标签（见出处）。<br>　　2. 在IE中识别到该meta标签含义，并不一定会在请求字段加上Pragma，但的确会让当前页面每次都发新请求（仅限页面，页面上的资源则不受影响）。</p>
+<p>二.HTTP协议定义的缓存机制</p>
+<p> 1.Expires<br>　Pragma用来禁用缓存，而Expires则是用来启用缓存和定义缓存时间首部字段。<br>　　同样在客户端我们可以使用meta标签来知会IE（也仅有IE能识别）页面（同样也只对页面有效，对页面上的资源无效）缓存时间：</p>
+<pre><code>&lt;meta http-equiv=&quot;expires&quot; content=&quot;mon, 18 apr 2016 14:30:00 GMT&quot;&gt;
+
+（取消缓存只需将content的值设为-1或0）
+</code></pre><p>　　<br>　　局限性：Expires 是HTTP 1.0的东西，现在默认浏览器均默认使用HTTP 1.1，所以它的作用基本忽略。<br>　　<br>　　注意：<br>　　优先级：Pragma&gt;Expires<br>　　<br>2.Cache-Control<br>　因为Expires的时间是相对服务器来说的，无法保证和客户端时间统一。HTTP1.1推出了新的通用首部字母Cache-Control来定义缓存过期时间。</p>
+<p>　　为了让服务器检验客户端现在存有的缓存文件是否跟其一样（以免因资源重复而浪费带宽），Http1.1新增了几个首部字段：<br>　　<br>2.1.Last-Modified<br>　服务器将资源传递给客户端时，会将资源最后更改的时间以“Last-Modified: GMT”的形式加在实体首部上一起返回给客户端。Last-Modified的值有两个：<br>　(1) If-Modified-Since：<br>　　该请求首部告诉服务器如果客户端传来的最后修改时间与服务器上的一致，则直接回送304 和响应报头即可。<br>　　当前各浏览器均是使用的该请求首部来向服务器传递保存的 Last-Modified 值。<br>　　<br>　(2) If-Unmodified-Since：<br>　　告诉服务器，若Last-Modified没有匹配上（资源在服务端的最后更新时间改变了），则应当返回412(Precondition Failed) 状态码给客户端<br>　　<br>　　Last-Modified的局限性：如果在服务器上，一个资源被修改了，但其实际内容根本没发生改变，会因为Last-Modified时间匹配不上而返回了整个实体给客户端（即使客户端缓存里有个一模一样的资源）。<br>　　<br>2.2.ETag<br>　为了解决上述Last-Modified可能存在的不准确的问题，Http1.1还推出了 ETag 实体首部字段。ETag值有两个：</p>
+<p>⑴ If-None-Matchf:<br>　告诉服务端如果 ETag 没匹配上需要重发资源数据，否则直接回送304 和响应报头即可。<br>　　当前各浏览器均是使用的该请求首部来向服务器传递保存的 ETag 值。<br>　　<br>(2)If-Match:<br>　告诉服务器如果没有匹配到ETag，或者收到了“*”值而当前并没有该资源实体，则应当返回412(Precondition Failed) 状态码给客户端。否则服务器直接忽略该字段。<br>　　If-Match的一个应用场景是，客户端走PUT方法向服务端请求上传/更替资源，这时候可以通过 If-Match 传递资源的ETag。<br>　　<br>三、有Last-Modified为什么还要Etag？<br>　l. Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间<br>　２. 如果某些文件会被定期生成，当有时内容并没有任何变化，但Last-Modified却改变了，导致文件没法使用缓存<br>　３.有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形</p>
+<p>Etag是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。Last-Modified与ETag是可以一起使用的，服务器会优先验证ETag，一致的情况下，才会继续比对Last-Modified，最后才决定是否返回304。</p>
+<p>###总结###</p>
+<p>浏览器第一次请求：<br><img src="/img/6.1.jpg" alt=""></p>
+<p>浏览器再次请求时：<br><img src="/img/6.2.jpg" alt=""></p>
+<p>参考文章：<br>　　1.作者：吴秦<br>　　 出处：<a href="http://www.cnblogs.com/skynet/" target="_blank" rel="external">http://www.cnblogs.com/skynet/</a><br>　　 2.作者：VaJoy Larn<br>　　 出处：www.cnblogs.com/vajoy/p/5341664.html </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;浏览器缓存机制，主要可以分为两大类。一是HTTP协议定义的缓存机制；二是非HTTP协议定义的缓存机制。下面以Pragma为例先说下后者。&lt;/p&gt;
+&lt;p&gt;一、Pragma（非HTTP协议定义的）&lt;br&gt;　&lt;br&gt;　　Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签（而且可能还得做些hack放到body后面去）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;meta http-equiv=&amp;quot;Pragma&amp;quot; content=&amp;quot;no-cache&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;　　“no-cache”命令即告诉浏览器每次请求时都不要读缓存，都要向服务器发一次请求。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="浏览器" scheme="http://yoursite.com/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    
+    
+      <category term="缓存" scheme="http://yoursite.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
   
   <entry>
     <title>HTTP协议（转载）</title>
