@@ -1,48 +1,497 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
+<search> 
   
     
     <entry>
       <title><![CDATA[HTTP协议（转载）]]></title>
-      <url>%2F2017%2F05%2F05%2Farticle5%2F</url>
-      <content type="text"><![CDATA[（注：本文转自Pickle出处：http://www.cnblogs.com/wxisme/） 一、HTTP协议的演进 HTTP（HyperText Transfer Protocol）协议是基于TCP的应用层协议，它不关心数据传输的细节，主要是用来规定客户端和服务端的数据传输格式，最初是用来向客户端传输HTML页面的内容。默认端口是80。 1.HTTP 0.9版本 1991年 这个版本就是最初用来向客户端传输HTML页面的，所以只有一个GET命令，然后服务器返回客户端一个HTML页面，不能是其他格式。利用这个版本完全可以构建一个简单的静态网站了。 2.HTTP 1.0版本 1996年 1.0版本是改变比较大的，奠定了现在HTTP协议的基础。这个版本的协议不仅可以传输HTML的文本页面，还可以传输其他二进制文件，例如图片、视频。而且还增加了现在常用的POST和HEAD命令。请求消息和响应消息也不是单一的了，规定了一些元数据字段。例如字符集、编码、状态响应码等。 3.HTTP 1.1版本 1997年 实际上是在1.0版本之后半年时间又发布了一个版本，这个版本在1.0版本的基础上更加完善了。这个版本增加了持久连接，就是说之前版本的协议一次请求就是一次TCP连接，请求完成后这个连接就关闭掉了。众所周知TCP协议是可靠的，建立连接需要3次握手，断开连接需要4次挥手，并且TCP有流量控制和拥塞控制，有慢开始机制，刚建立连接时传输比较慢，这是比较耗费资源的。一个丰富的页面会有许多图片、表单和超链接。这样的话就会有多次的HTTP请求，所以在这个版本上默认不关闭TCP连接也不用声明Connection: keep-alive字段。如果确实要关闭可以指定Connection: close字段。还引入了管道机制，就是说在一个TCP连接里可以同时发送多个HTTP请求，而不必等待上一个请求响应成功再发送。还增加了PUT、PATCH、HEAD、 OPTIONS、DELETE等命令，丰富了客户端和服务端交互动作。还增加了Host字段。 4.HTTP 2版本 2015年 这个版本也是随着互联网的发展，有了新的需求制定了新的功能还有对上一个版本的完善。1.1版本有了管道机制，但是正在服务端还是要对请求进行排队处理。这个版本可以多工的处理。还有了头信息压缩和服务器的主动推送。 5.HTTPS HTTPS是HTTP协议的安全版本，HTTP协议的数据传输是明文的，是不安全的，HTTPS使用了SSL/TLS协议进行了加密处理。 关于HTTP协议历史演进的详细介绍请参考：http://www.ruanyifeng.com/blog/2016/08/http.html 下面介绍没有特殊说明默认HTTP/1.1版本 二、HTTP协议的特点 1.HTTP协议是无状态的 就是说每次HTTP请求都是独立的，任何两个请求之间没有什么必然的联系。但是在实际应用当中并不是完全这样的，引入了Cookie和Session机制来关联请求。 2.多次HTTP请求 在客户端请求网页时多数情况下并不是一次请求就能成功的，服务端首先是响应HTML页面，然后浏览器收到响应之后发现HTML页面还引用了其他的资源，例如，CSS，JS文件，图片等等，还会自动发送HTTP请求这些需要的资源。现在的HTTP版本支持管道机制，可以同时请求和响应多个请求，大大提高了效率。 3.基于TCP协议 HTTP协议目的是规定客户端和服务端数据传输的格式和数据交互行为，并不负责数据传输的细节。底层是基于TCP实现的。现在使用的版本当中是默认持久连接的，也就是多次HTTP请求使用一个TCP连接。 三、HTTP报文 1.请求报文 举例： GET /wxisme HTTP/1.1 Host: www.cnblogs.com User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.0; zh-CN; rv:1.8.1) Gecko/20061010 Firefox/2.0 Accept: text/xml,application/xml,application/xhtml+xml,text/htm l;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5 Accept-Language: en-us,zh-cn;q=0.7,zh;q=0.3 Accept-Encoding: gzip,deflate Accept-Charset: gb2312,utf-8;q=0.7,*;q=0.7 Keep-Alive: 300 Proxy-Connection: keep-alive Cookie: ASP.NET_SessionId=ey5drq45lsomio55hoydzc45 Cache-Control: max-age=0 复制代码 简单来说请求报文就是由请求行、请求头、内容实体组成的，注意，每一行的末尾都有回车和换行，在内容实体和请求头之间另有一个空行。其中请求行指定的是请求方法、请求URL、协议版本；请求头是键值对的形式存在的，就是字段名：值；内容实体就是要传输的数据。稍后会对方法、请求头字段做详细的说明。 2.响应报文 举例： HTTP/1.1 200 OK Date: Tue, 12 Jul 2016 21:36:12 GMT Content-Length: 563 Content-Type: text/html &lt;html&gt; &lt;body&gt; Hello http! &lt;/body&gt; &lt;/html&gt; 简单来说响应报文由状态行、响应首部字段（响应头）、响应实体组成，其中第一行是状态行，依次包含HTTP版本，状态码和状态短语组成；在一个回车换行之后是响应头，也是键值对的形式，字段名：值；然后会有一个空行也包含回车换行，之后是响应实体，就是要传输的数据。在上面的例子当中就是一个非常简单的HTML页面。对于响应状态码，首部字段键值对稍后会有更加详细的说明。 四、HTTP请求方法 请求方法是客户端用来告知服务器其动作意图的方法。就像下达命令一样。在HTTP1.1版本中支持GET、POST等近10种方法。需要注意的是方法名区分大小写，需要用大写字母。下面详细说明。 1.GET：获取资源 GET方法用来请求访问已被URI识别的资源。也就是指定了服务器处理请求之后响应的内容。 2.POST：传输实体主体 POST方法用来传输实体主体。POST与GET的区别之一就是目的不同，二者之间的区别会在文章的最后详细说明。虽然GET方法也可以传输，但是一般不用，因为GET的目的是获取，POST的目的是传输。 3.PUT：传输文件 PUT方法用来传输文件。类似FTP协议，文件内容包含在请求报文的实体中，然后请求保存到URL指定的服务器位置。 4.HEAD：获得报文首部 HEAD方法类似GET方法，但是不同的是HEAD方法不要求返回数据。用于确认URI的有效性及资源更新时间等。 5.DELETE：删除文件 DELETE方法用来删除文件，是与PUT相反的方法。DELETE是要求返回URL指定的资源。 6.OPTIONS：询问支持的方法 因为并不是所有的服务器都支持规定的方法，为了安全有些服务器可能会禁止掉一些方法例如DELETE、PUT等。那么OPTIONS就是用来询问服务器支持的方法。 7.TRACE：追踪路径 TRACE方法是让Web服务器将之前的请求通信环回给客户端的方法。这个方法并不常用。 8.CONNECT：要求用隧道协议连接代理 CONNECT方法要求在与代理服务器通信时建立隧道，实现用隧道协议进行TCP通信。主要使用SSL/TLS协议对通信内容加密后传输。 汇总： 五、HTTP的响应状态码 状态码是用来告知客户端服务器端处理请求的结果。凭借状态码用户可以知道服务器是请求处理成功、失败或者是被转发；这样出现了错误也好定位。状态码是由3位数字加原因短语组成。3位数字中的第一位是用来指定状态的类别。共有5种。 HTTP状态码一共有60多种，但是不用全部都记住，因为大部分在工作当中是不经常使用的。经常使用的大概就是16种，下面来详细介绍。（其实最最常用的也就8种，下面有背景色的就是） 1. 200：OK 这个没有什么好说的，是代表请求被正常的处理成功了。 2. 204：No Content 请求处理成功，但是没有数据实体返回，也不允许有实体返回。比如说HEAD请求，可能就会返回204 No Content，因为HEAD就是只获取头信息。这里简单提一下205 Reset Content，和204 No Content的区别是不但没有数据实体返回，而且还需要重置表单，方便用户再次输入。 3. 206：Partial Content 这是客户端使用Content-Range指定了需要的实体数据的范围，然后服务端处理请求成功之后返回用户需要的这一部分数据而不是全部，执行的请求就是GET。返回码就是206：Partial Content。 4. 301 ： Moved Permanently 代表永久性定向。该状态码表示请求的资源已经被分配了新的URL，以后应该使用资源现在指定的URL。也就是说如果已经把资源对应的URL保存为书签了，这是应该按照Location首部字段提示的URL重新保存。 5. 302：Found 代表临时重定向。该状态码表示请求的资源已经被分配了新的URL，但是和301的区别是302代表的不是永久性的移动，只是临时的。就是说这个URL还可能会发生改变。如果保存成书签了也不会更新。 6. 303：See Other 和302的区别是303明确规定客户端应当使用GET方法。 7. 304：Not Modified 该状态码表示客户端发送附带条件请求时，服务器端允许请求访问资源，但是没有满足条件。304状态码返回时不包含任何数据实体。304虽然被划分在3XX中但是和重定向没有关系。 8. 307：Temporary Redirect 临时重定向，与302 Found相同，但是302会把POST改成GET，而307就不会。 9. 400：Bad Request 400表示请求报文中存在语法错误。需要修改后再次发送。 10. 401：Unauthorized 该状态码表示发送的请求需要有通过HTTP认证的认证信息。 11. 403：Forbidden 表明请求访问的资源被拒绝了。没有获得服务器的访问权限，IP被禁止等。 12. 404：Not Found 表明请求的资源在服务器上找不到。当然也可以在服务器拒绝请求且不想说明理由时使用。 13. 408：Request Timeout 表示客户端请求超时，就是在客户端和服务器建立连接后服务器在一定时间内没有收到客户端的请求。 14. 500：Internal Server Error 表明服务器端在执行请求时发生了错误，很有可能是服务端程序的Bug或者临时故障。 15. 503：Service Unavailable 表明服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。如果事先得知解除以上状况需要的时间，最好写入Retry-After字段再返回给客户端。 16. 504：Getaway Timeout 网关超时，是代理服务器等待应用服务器响应时的超时，和408 Request Timeout的却别就是504是服务器的原因而不是客户端的原因 更加详细的状态码请参考：http://tool.oschina.net/commons?type=5 六、HTTP的首部字段 HTTP首部字段是构成HTTP报文最重要的元素之一。在客户端与服务端之前进行信息传递的时候请求和响应都会使用首部字段，会传递一些重要的元信息。首部字段是以键值对的形式存在的。包含报文的主体大小、语言、认证信息等。HTTP首部字段包含4种类型： 通用首部字段（General Header Fields） 代表请求报文和响应报文都会使用的字段 请求首部字段（Request Header Fields） 是客户端向服务端发送请求时使用的首部字段。包含请求的附加内容、客户端信息、响应内容相关优先级等信息。 响应首部字段（Response Header Fields） 是服务端向客户端返回响应时使用的首部字段，包含响应的附加内容，可能也会要求客户端附加额外的内容信息。 实体首部字段（Entity Header Fields） 是针对请求报文和响应报文的实体部分使用的首部。包含资源内容更新时间等和实体有关的信息。 在HTTP/1.1种规定了47种首部字段（图表参考《图解HTTP》，感谢作者。） 通用首部字段 请求首部字段 响应首部字段 实体首部字段 其他首部字段 Cookie、Set-Cookie、Content-Disposition、Connection、Keep-Alive、Proxy-Authenticate、Proxy-Authorization、Trailer、TE、Transfer-Encoding、Upgrade etc… 这么多的首部字段，估计如果不是很了解会被吓着，但是根本不用全部记住，其实字段的名字就说明了作用，看一眼就大概知道是干啥的了，只不过有些类似的字段要区分一下就好了。只要深刻理解了HTTP的设计思路就没有大问题了，熟悉常见的就可以了。用到的时候想了解细节再去查。 关于首部字段的细节请参考《图解HTTP》或者《HTTP权威指南》的首部字段部分。够再写一篇长博客的了~ 以上就把HTTP协议的重点内容——报文格式、方法、状态码、首部字段介绍完了，可以说对HTTP协议有了一些了解。下面就工作中的常见问题（或者说面试中的）做一个总结。^_^ 七、关于HTTP的常见问题及解答 1.GET和POST的区别 A. 从字面意思和HTTP的规范来看，GET用于获取资源信息而POST是用来更新资源信息。 B. GET提交请求的数据实体会放在URL的后面，用?来分割，参数用&amp;连接，举个栗子：/index.html?name=wang&amp;login=1 C. GET提交的数据长度是有限制的，因为URL长度有限制，具体的长度限制视浏览器而定。而POST没有。 D. GET提交的数据不安全，因为参数都会暴露在URL上。 2.408 Request Timeout和504 Gateway Timeout的区别 408是说请求超时，就是建立连接之后再约定的时间内客户端没有发送请求到客户端到服务端。本质上原因在于客户端或者网络拥塞。504是网关超时，是说代理服务器把客户端请求转发到应用服务器后再约定的时间内没有收到应用服务器的响应。本质上原因在于服务端的响应过慢，也有可能是网络问题。 3.Cookie和Session的区别和联系 Cookie和Session都是为了保存客户端和服务端之间的交互状态，实现机制不同，各有优缺点。首先一个最大的区别就是Cookie是保存在客户端而Session就保存在服务端的。Cookie是客户端请求服务端时服务器会将一些信息以键值对的形式返回给客户端，保存在浏览器中，交互的时候可以加上这些Cookie值。用Cookie就可以方便的做一些缓存。Cookie的缺点是大小和数量都有限制；Cookie是存在客户端的可能被禁用、删除、篡改，是不安全的；Cookie如果很大，每次要请求都要带上，这样就影响了传输效率。Session是基于Cookie来实现的，不同的是Session本身存在于服务端，但是每次传输的时候不会传输数据，只是把代表一个客户端的唯一ID（通常是JSESSIONID）写在客户端的Cookie中，这样每次传输这个ID就可以了。Session的优势就是传输数据量小，比较安全。但是Session也有缺点，就是如果Session不做特殊的处理容易失效、过期、丢失或者Session过多导致服务器内存溢出，并且要实现一个稳定可用安全的分布式Session框架也是有一定复杂度的。在实际使用中就要结合Cookie和Session的优缺点针对不同的问题来设计解决方案。]]></content>
-    </entry>
+      <url>/2017/05/05/article5/</url>
+      <content type="html"><![CDATA[<p>（注：本文转自Pickle<br>出处：<a href="http://www.cnblogs.com/wxisme/）" target="_blank" rel="external">http://www.cnblogs.com/wxisme/）</a></p>
+<h3 id="一、HTTP协议的演进"><a href="#一、HTTP协议的演进" class="headerlink" title="一、HTTP协议的演进"></a>一、HTTP协议的演进</h3><p>　　HTTP（HyperText Transfer Protocol）协议是基于TCP的应用层协议，它不关心数据传输的细节，主要是用来规定客户端和服务端的数据传输格式，最初是用来向客户端传输HTML页面的内容。默认端口是80。</p>
+<h4 id="1-HTTP-0-9版本-1991年"><a href="#1-HTTP-0-9版本-1991年" class="headerlink" title="　　1.HTTP 0.9版本　　1991年"></a>　　1.HTTP 0.9版本　　1991年</h4><p>　　这个版本就是最初用来向客户端传输HTML页面的，所以只有一个GET命令，然后服务器返回客户端一个HTML页面，不能是其他格式。利用这个版本完全可以构建一个简单的静态网站了。<br><a id="more"></a></p>
+<h4 id="2-HTTP-1-0版本-1996年"><a href="#2-HTTP-1-0版本-1996年" class="headerlink" title="　　2.HTTP 1.0版本　　1996年"></a>　　2.HTTP 1.0版本　　1996年</h4><p>　　1.0版本是改变比较大的，奠定了现在HTTP协议的基础。这个版本的协议不仅可以传输HTML的文本页面，还可以传输其他二进制文件，例如图片、视频。而且还增加了现在常用的POST和HEAD命令。请求消息和响应消息也不是单一的了，规定了一些元数据字段。例如字符集、编码、状态响应码等。</p>
+<h4 id="3-HTTP-1-1版本-1997年"><a href="#3-HTTP-1-1版本-1997年" class="headerlink" title="　　3.HTTP 1.1版本　　1997年"></a>　　3.HTTP 1.1版本　　1997年</h4><p>　　实际上是在1.0版本之后半年时间又发布了一个版本，这个版本在1.0版本的基础上更加完善了。这个版本增加了持久连接，就是说之前版本的协议一次请求就是一次TCP连接，请求完成后这个连接就关闭掉了。众所周知TCP协议是可靠的，建立连接需要3次握手，断开连接需要4次挥手，并且TCP有流量控制和拥塞控制，有慢开始机制，刚建立连接时传输比较慢，这是比较耗费资源的。一个丰富的页面会有许多图片、表单和超链接。这样的话就会有多次的HTTP请求，所以在这个版本上默认不关闭TCP连接也不用声明Connection: keep-alive字段。如果确实要关闭可以指定Connection: close字段。还引入了管道机制，就是说在一个TCP连接里可以同时发送多个HTTP请求，而不必等待上一个请求响应成功再发送。还增加了PUT、PATCH、HEAD、 OPTIONS、DELETE等命令，丰富了客户端和服务端交互动作。还增加了Host字段。</p>
+<h4 id="4-HTTP-2版本-2015年"><a href="#4-HTTP-2版本-2015年" class="headerlink" title="　　4.HTTP 2版本　　2015年"></a>　　4.HTTP 2版本　　2015年</h4><!--more-->
+<p>　　这个版本也是随着互联网的发展，有了新的需求制定了新的功能还有对上一个版本的完善。1.1版本有了管道机制，但是正在服务端还是要对请求进行排队处理。这个版本可以多工的处理。还有了头信息压缩和服务器的主动推送。</p>
+<h4 id="5-HTTPS"><a href="#5-HTTPS" class="headerlink" title="　　5.HTTPS"></a>　　5.HTTPS</h4><p>　　HTTPS是HTTP协议的安全版本，HTTP协议的数据传输是明文的，是不安全的，HTTPS使用了SSL/TLS协议进行了加密处理。</p>
+<p>　　关于HTTP协议历史演进的详细介绍请参考：<a href="http://www.ruanyifeng.com/blog/2016/08/http.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2016/08/http.html</a></p>
+<p>　　下面介绍没有特殊说明默认HTTP/1.1版本</p>
+<h3 id="二、HTTP协议的特点"><a href="#二、HTTP协议的特点" class="headerlink" title="二、HTTP协议的特点"></a>二、HTTP协议的特点</h3><h4 id="1-HTTP协议是无状态的"><a href="#1-HTTP协议是无状态的" class="headerlink" title="　　1.HTTP协议是无状态的"></a>　　1.HTTP协议是无状态的</h4><p>　　就是说每次HTTP请求都是独立的，任何两个请求之间没有什么必然的联系。但是在实际应用当中并不是完全这样的，引入了Cookie和Session机制来关联请求。</p>
+<h4 id="2-多次HTTP请求"><a href="#2-多次HTTP请求" class="headerlink" title="　　2.多次HTTP请求"></a>　　2.多次HTTP请求</h4><p>　　在客户端请求网页时多数情况下并不是一次请求就能成功的，服务端首先是响应HTML页面，然后浏览器收到响应之后发现HTML页面还引用了其他的资源，例如，CSS，JS文件，图片等等，还会自动发送HTTP请求这些需要的资源。现在的HTTP版本支持管道机制，可以同时请求和响应多个请求，大大提高了效率。</p>
+<h4 id="3-基于TCP协议"><a href="#3-基于TCP协议" class="headerlink" title="　　3.基于TCP协议"></a>　　3.基于TCP协议</h4><p>　　HTTP协议目的是规定客户端和服务端数据传输的格式和数据交互行为，并不负责数据传输的细节。底层是基于TCP实现的。现在使用的版本当中是默认持久连接的，也就是多次HTTP请求使用一个TCP连接。</p>
+<h3 id="三、HTTP报文"><a href="#三、HTTP报文" class="headerlink" title="三、HTTP报文"></a>三、HTTP报文</h3><h4 id="1-请求报文"><a href="#1-请求报文" class="headerlink" title="　　1.请求报文"></a>　　1.请求报文</h4><p>   <img src="/img/c1.jpg" alt=""><br>　　举例：</p>
+<pre><code>GET /wxisme HTTP/1.1  
+Host: www.cnblogs.com 
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.0; zh-CN;     rv:1.8.1) Gecko/20061010 Firefox/2.0  
+Accept: text/xml,application/xml,application/xhtml+xml,text/htm    l;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5  
+Accept-Language: en-us,zh-cn;q=0.7,zh;q=0.3  
+Accept-Encoding: gzip,deflate  
+Accept-Charset: gb2312,utf-8;q=0.7,*;q=0.7  
+Keep-Alive: 300  
+Proxy-Connection: keep-alive  
+Cookie: ASP.NET_SessionId=ey5drq45lsomio55hoydzc45
+Cache-Control: max-age=0
+</code></pre><p>复制代码<br>　　简单来说请求报文就是由请求行、请求头、内容实体组成的，注意，每一行的末尾都有回车和换行，在内容实体和请求头之间另有一个空行。其中请求行指定的是请求方法、请求URL、协议版本；请求头是键值对的形式存在的，就是字段名：值；内容实体就是要传输的数据。稍后会对方法、请求头字段做详细的说明。</p>
+<h4 id="2-响应报文"><a href="#2-响应报文" class="headerlink" title="　　2.响应报文"></a>　　2.响应报文</h4><p>　　<img src="/img/c2.jpg" alt=""></p>
+<p>　　举例：</p>
+<pre><code>HTTP/1.1 200 OK
+Date: Tue, 12 Jul 2016 21:36:12 GMT
+Content-Length: 563
+Content-Type: text/html
 
+&lt;html&gt;
+  &lt;body&gt;
+  Hello http!
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>　　简单来说响应报文由状态行、响应首部字段（响应头）、响应实体组成，其中第一行是状态行，依次包含HTTP版本，状态码和状态短语组成；在一个回车换行之后是响应头，也是键值对的形式，字段名：值；然后会有一个空行也包含回车换行，之后是响应实体，就是要传输的数据。在上面的例子当中就是一个非常简单的HTML页面。对于响应状态码，首部字段键值对稍后会有更加详细的说明。</p>
+<h3 id="四、HTTP请求方法"><a href="#四、HTTP请求方法" class="headerlink" title="四、HTTP请求方法"></a>四、HTTP请求方法</h3><p>　　请求方法是客户端用来告知服务器其动作意图的方法。就像下达命令一样。在HTTP1.1版本中支持GET、POST等近10种方法。需要注意的是方法名区分大小写，需要用大写字母。下面详细说明。</p>
+<h4 id="1-GET：获取资源"><a href="#1-GET：获取资源" class="headerlink" title="　　1.GET：获取资源"></a>　　1.GET：获取资源</h4><p>　　GET方法用来请求访问已被URI识别的资源。也就是指定了服务器处理请求之后响应的内容。</p>
+<h4 id="2-POST：传输实体主体"><a href="#2-POST：传输实体主体" class="headerlink" title="　　2.POST：传输实体主体"></a>　　2.POST：传输实体主体</h4><p>　　POST方法用来传输实体主体。POST与GET的区别之一就是目的不同，二者之间的区别会在文章的最后详细说明。虽然GET方法也可以传输，但是一般不用，因为GET的目的是获取，POST的目的是传输。</p>
+<h4 id="3-PUT：传输文件"><a href="#3-PUT：传输文件" class="headerlink" title="　　3.PUT：传输文件"></a>　　3.PUT：传输文件</h4><p>　　PUT方法用来传输文件。类似FTP协议，文件内容包含在请求报文的实体中，然后请求保存到URL指定的服务器位置。</p>
+<h4 id="4-HEAD：获得报文首部"><a href="#4-HEAD：获得报文首部" class="headerlink" title="　　4.HEAD：获得报文首部"></a>　　4.HEAD：获得报文首部</h4><p>　　HEAD方法类似GET方法，但是不同的是HEAD方法不要求返回数据。用于确认URI的有效性及资源更新时间等。</p>
+<h4 id="5-DELETE：删除文件"><a href="#5-DELETE：删除文件" class="headerlink" title="　　5.DELETE：删除文件"></a>　　5.DELETE：删除文件</h4><p>　　DELETE方法用来删除文件，是与PUT相反的方法。DELETE是要求返回URL指定的资源。</p>
+<h4 id="6-OPTIONS：询问支持的方法"><a href="#6-OPTIONS：询问支持的方法" class="headerlink" title="　　6.OPTIONS：询问支持的方法"></a>　　6.OPTIONS：询问支持的方法</h4><p>　　因为并不是所有的服务器都支持规定的方法，为了安全有些服务器可能会禁止掉一些方法例如DELETE、PUT等。那么OPTIONS就是用来询问服务器支持的方法。</p>
+<h4 id="7-TRACE：追踪路径"><a href="#7-TRACE：追踪路径" class="headerlink" title="　　7.TRACE：追踪路径"></a>　　7.TRACE：追踪路径</h4><p>　　TRACE方法是让Web服务器将之前的请求通信环回给客户端的方法。这个方法并不常用。</p>
+<h4 id="8-CONNECT：要求用隧道协议连接代理"><a href="#8-CONNECT：要求用隧道协议连接代理" class="headerlink" title="　　8.CONNECT：要求用隧道协议连接代理"></a>　　8.CONNECT：要求用隧道协议连接代理</h4><p>　　CONNECT方法要求在与代理服务器通信时建立隧道，实现用隧道协议进行TCP通信。主要使用SSL/TLS协议对通信内容加密后传输。</p>
+<p>　　汇总：<br><img src="/img/c3.png" alt=""></p>
+<h3 id="五、HTTP的响应状态码"><a href="#五、HTTP的响应状态码" class="headerlink" title="五、HTTP的响应状态码"></a>五、HTTP的响应状态码</h3><p>　　状态码是用来告知客户端服务器端处理请求的结果。凭借状态码用户可以知道服务器是请求处理成功、失败或者是被转发；这样出现了错误也好定位。状态码是由3位数字加原因短语组成。3位数字中的第一位是用来指定状态的类别。共有5种。<br><img src="/img/c4.png" alt=""></p>
+<p>　　HTTP状态码一共有60多种，但是不用全部都记住，因为大部分在工作当中是不经常使用的。经常使用的大概就是16种，下面来详细介绍。（其实最最常用的也就8种，下面有背景色的就是）</p>
+<h4 id="1-200：OK"><a href="#1-200：OK" class="headerlink" title="　　1. 200：OK"></a>　　1. 200：OK</h4><p>　　这个没有什么好说的，是代表请求被正常的处理成功了。</p>
+<h4 id="2-204：No-Content"><a href="#2-204：No-Content" class="headerlink" title="　　2. 204：No Content"></a>　　2. 204：No Content</h4><p>　　请求处理成功，但是没有数据实体返回，也不允许有实体返回。比如说HEAD请求，可能就会返回204 No Content，因为HEAD就是只获取头信息。这里简单提一下205 Reset Content，和204 No Content的区别是不但没有数据实体返回，而且还需要重置表单，方便用户再次输入。</p>
+<h4 id="3-206：Partial-Content"><a href="#3-206：Partial-Content" class="headerlink" title="　　3. 206：Partial Content"></a>　　3. 206：Partial Content</h4><p>　　这是客户端使用Content-Range指定了需要的实体数据的范围，然后服务端处理请求成功之后返回用户需要的这一部分数据而不是全部，执行的请求就是GET。返回码就是206：Partial Content。</p>
+<h4 id="4-301-：-Moved-Permanently"><a href="#4-301-：-Moved-Permanently" class="headerlink" title="　　4. 301 ： Moved Permanently"></a>　　4. 301 ： Moved Permanently</h4><p>　　代表永久性定向。该状态码表示请求的资源已经被分配了新的URL，以后应该使用资源现在指定的URL。也就是说如果已经把资源对应的URL保存为书签了，这是应该按照Location首部字段提示的URL重新保存。</p>
+<h4 id="5-302：Found"><a href="#5-302：Found" class="headerlink" title="　　5. 302：Found"></a>　　5. 302：Found</h4><p>　　代表临时重定向。该状态码表示请求的资源已经被分配了新的URL，但是和301的区别是302代表的不是永久性的移动，只是临时的。就是说这个URL还可能会发生改变。如果保存成书签了也不会更新。</p>
+<h4 id="6-303：See-Other"><a href="#6-303：See-Other" class="headerlink" title="　　6. 303：See Other"></a>　　6. 303：See Other</h4><p>　　和302的区别是303明确规定客户端应当使用GET方法。</p>
+<h4 id="7-304：Not-Modified"><a href="#7-304：Not-Modified" class="headerlink" title="　　7. 304：Not Modified"></a>　　7. 304：Not Modified</h4><p>　　该状态码表示客户端发送附带条件请求时，服务器端允许请求访问资源，但是没有满足条件。304状态码返回时不包含任何数据实体。304虽然被划分在3XX中但是和重定向没有关系。</p>
+<h4 id="8-307：Temporary-Redirect"><a href="#8-307：Temporary-Redirect" class="headerlink" title="　　8. 307：Temporary Redirect"></a>　　8. 307：Temporary Redirect</h4><p>　　临时重定向，与302 Found相同，但是302会把POST改成GET，而307就不会。</p>
+<h4 id="9-400：Bad-Request"><a href="#9-400：Bad-Request" class="headerlink" title="　　9.  400：Bad Request"></a>　　9.  400：Bad Request</h4><p>　　400表示请求报文中存在语法错误。需要修改后再次发送。</p>
+<h4 id="10-401：Unauthorized"><a href="#10-401：Unauthorized" class="headerlink" title="　　10. 401：Unauthorized"></a>　　10. 401：Unauthorized</h4><p>　　该状态码表示发送的请求需要有通过HTTP认证的认证信息。</p>
+<h4 id="11-403：Forbidden"><a href="#11-403：Forbidden" class="headerlink" title="　　11. 403：Forbidden"></a>　　11. 403：Forbidden</h4><p>　　表明请求访问的资源被拒绝了。没有获得服务器的访问权限，IP被禁止等。</p>
+<h4 id="12-404：Not-Found"><a href="#12-404：Not-Found" class="headerlink" title="　　12. 404：Not Found"></a>　　12. 404：Not Found</h4><p>　　表明请求的资源在服务器上找不到。当然也可以在服务器拒绝请求且不想说明理由时使用。</p>
+<h4 id="13-408：Request-Timeout"><a href="#13-408：Request-Timeout" class="headerlink" title="　　13. 408：Request Timeout"></a>　　13. 408：Request Timeout</h4><p>　　表示客户端请求超时，就是在客户端和服务器建立连接后服务器在一定时间内没有收到客户端的请求。</p>
+<h4 id="14-500：Internal-Server-Error"><a href="#14-500：Internal-Server-Error" class="headerlink" title="　　14. 500：Internal Server Error"></a>　　14. 500：Internal Server Error</h4><p>　　表明服务器端在执行请求时发生了错误，很有可能是服务端程序的Bug或者临时故障。</p>
+<h4 id="15-503：Service-Unavailable"><a href="#15-503：Service-Unavailable" class="headerlink" title="　　15. 503：Service Unavailable"></a>　　15. 503：Service Unavailable</h4><p>　　表明服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。如果事先得知解除以上状况需要的时间，最好写入Retry-After字段再返回给客户端。</p>
+<h4 id="16-504：Getaway-Timeout"><a href="#16-504：Getaway-Timeout" class="headerlink" title="　　16. 504：Getaway Timeout"></a>　　16. 504：Getaway Timeout</h4><p>　　网关超时，是代理服务器等待应用服务器响应时的超时，和408 Request Timeout的却别就是504是服务器的原因而不是客户端的原因</p>
+<p>　　更加详细的状态码请参考：<a href="http://tool.oschina.net/commons?type=5" target="_blank" rel="external">http://tool.oschina.net/commons?type=5</a></p>
+<h3 id="六、HTTP的首部字段"><a href="#六、HTTP的首部字段" class="headerlink" title="六、HTTP的首部字段"></a>六、HTTP的首部字段</h3><p>　　HTTP首部字段是构成HTTP报文最重要的元素之一。在客户端与服务端之前进行信息传递的时候请求和响应都会使用首部字段，会传递一些重要的元信息。首部字段是以键值对的形式存在的。包含报文的主体大小、语言、认证信息等。HTTP首部字段包含4种类型：</p>
+<p>　　通用首部字段（General Header Fields）</p>
+<p>　　代表请求报文和响应报文都会使用的字段</p>
+<p>　　请求首部字段（Request Header Fields）</p>
+<p>　　是客户端向服务端发送请求时使用的首部字段。包含请求的附加内容、客户端信息、响应内容相关优先级等信息。</p>
+<p>　　响应首部字段（Response Header Fields）</p>
+<p>　　是服务端向客户端返回响应时使用的首部字段，包含响应的附加内容，可能也会要求客户端附加额外的内容信息。</p>
+<p>　　实体首部字段（Entity Header Fields）</p>
+<p>　　是针对请求报文和响应报文的实体部分使用的首部。包含资源内容更新时间等和实体有关的信息。</p>
+<p>　　在HTTP/1.1种规定了47种首部字段（图表参考《图解HTTP》，感谢作者。）</p>
+<p>　　通用首部字段<br><img src="/img/c5.png" alt="">
+　　      </p>
+<p>　　请求首部字段<br><img src="/img/c6.png" alt="">
+　　      </p>
+<p>　　响应首部字段<br><img src="/img/c7.png" alt="">
+　　      </p>
+<p>　　实体首部字段<br><img src="/img/c8.png" alt="">
+　　      </p>
+<p>　　其他首部字段</p>
+<p>　　　  Cookie、Set-Cookie、Content-Disposition、Connection、Keep-Alive、Proxy-Authenticate、Proxy-Authorization、Trailer、TE、Transfer-Encoding、Upgrade etc…</p>
+<p>　　这么多的首部字段，估计如果不是很了解会被吓着，但是根本不用全部记住，其实字段的名字就说明了作用，看一眼就大概知道是干啥的了，只不过有些类似的字段要区分一下就好了。只要深刻理解了HTTP的设计思路就没有大问题了，熟悉常见的就可以了。用到的时候想了解细节再去查。</p>
+<p>　　关于首部字段的细节请参考《图解HTTP》或者《HTTP权威指南》的首部字段部分。够再写一篇长博客的了~</p>
+<p>　　以上就把HTTP协议的重点内容——报文格式、方法、状态码、首部字段介绍完了，可以说对HTTP协议有了一些了解。下面就工作中的常见问题（或者说面试中的）做一个总结。^_^</p>
+<h3 id="七、关于HTTP的常见问题及解答"><a href="#七、关于HTTP的常见问题及解答" class="headerlink" title="七、关于HTTP的常见问题及解答"></a>七、关于HTTP的常见问题及解答</h3><h4 id="1-GET和POST的区别"><a href="#1-GET和POST的区别" class="headerlink" title="　　1.GET和POST的区别"></a>　　1.GET和POST的区别</h4><p>　　A. 从字面意思和HTTP的规范来看，GET用于获取资源信息而POST是用来更新资源信息。</p>
+<p>　　B. GET提交请求的数据实体会放在URL的后面，用?来分割，参数用&amp;连接，举个栗子：/index.html?name=wang&amp;login=1</p>
+<p>　　C. GET提交的数据长度是有限制的，因为URL长度有限制，具体的长度限制视浏览器而定。而POST没有。</p>
+<p>　　D. GET提交的数据不安全，因为参数都会暴露在URL上。</p>
+<h4 id="2-408-Request-Timeout和504-Gateway-Timeout的区别"><a href="#2-408-Request-Timeout和504-Gateway-Timeout的区别" class="headerlink" title="　　2.408 Request Timeout和504 Gateway Timeout的区别"></a>　　2.408 Request Timeout和504 Gateway Timeout的区别</h4><p>　　408是说请求超时，就是建立连接之后再约定的时间内客户端没有发送请求到客户端到服务端。本质上原因在于客户端或者网络拥塞。504是网关超时，是说代理服务器把客户端请求转发到应用服务器后再约定的时间内没有收到应用服务器的响应。本质上原因在于服务端的响应过慢，也有可能是网络问题。</p>
+<h4 id="3-Cookie和Session的区别和联系"><a href="#3-Cookie和Session的区别和联系" class="headerlink" title="　　3.Cookie和Session的区别和联系"></a>　　3.Cookie和Session的区别和联系</h4><p>　　Cookie和Session都是为了保存客户端和服务端之间的交互状态，实现机制不同，各有优缺点。首先一个最大的区别就是Cookie是保存在客户端而Session就保存在服务端的。Cookie是客户端请求服务端时服务器会将一些信息以键值对的形式返回给客户端，保存在浏览器中，交互的时候可以加上这些Cookie值。用Cookie就可以方便的做一些缓存。Cookie的缺点是大小和数量都有限制；Cookie是存在客户端的可能被禁用、删除、篡改，是不安全的；Cookie如果很大，每次要请求都要带上，这样就影响了传输效率。Session是基于Cookie来实现的，不同的是Session本身存在于服务端，但是每次传输的时候不会传输数据，只是把代表一个客户端的唯一ID（通常是JSESSIONID）写在客户端的Cookie中，这样每次传输这个ID就可以了。Session的优势就是传输数据量小，比较安全。但是Session也有缺点，就是如果Session不做特殊的处理容易失效、过期、丢失或者Session过多导致服务器内存溢出，并且要实现一个稳定可用安全的分布式Session框架也是有一定复杂度的。在实际使用中就要结合Cookie和Session的优缺点针对不同的问题来设计解决方案。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> http </tag>
+            
+        </tags>
+        
+    </entry>
     
     <entry>
       <title><![CDATA[跨站脚本攻击（XSS)]]></title>
-      <url>%2F2017%2F05%2F03%2Farticle4%2F</url>
-      <content type="text"><![CDATA[1.定义 XSS，即跨站脚本攻击。指攻击者在web页面中插入恶意的脚本代码，当用户浏览该页时，嵌入web里面的脚本代码被执行，从而达到攻击者的目的。 看一个简单的跨站脚本攻击范例： 以下代码使用ASP.NET接收一个传送的参数，并将其显示出来： &lt;%@Page Language=&quot;C#&quot; ResponseEncoding=&quot;utf-8&quot; ValidateRequest=&quot;False&quot;%&gt; &lt;% string scriptSring = Request.QueryString[0]; Response.Write(scriptString); %&gt; 这是一个简单的动态网页，正常情况下没有问题，但如果有恶意者使用下面的网址请求： http://localhost/test.aspx?alert(“hi!XSS is here”); 则页面会出现： 由于没有对输入的请求进行验证就进行了输出，从而会执行客户端脚本代码。如果某个地址是别人通过“骗你”单击一个连接发起的，并且客户端脚本代码是用来获取你的会话和Cookie的，那么你的信息就被窃取并被提交到攻击者的web站点，从而被非法利用。 2.XSS的攻击方式(1).反射型 发出请求时，XSS代码出现在URL中，作为输入提交到服务器端，服务器端解析后响应，XSS代码随响应内容一起传回给浏览器，最后浏览器解析执行XSS代码。此过程像一次反射，故叫反射型CSS。 (2).存储型 存储型XSS和反射型XSS差别仅在于，提交的代码会存储在服务器端（数据库，内存，文件系统等），下次请求目标页面时不用再提交XSS代码。 3.如何防范XSS XSS的防御方法，只要有以下三种：(1).编码 将输入的字符进行转义，需要引入ecode.js库。 (2)过滤（客户端）： 移除用户上传的DOM属性，如onerror、onclick、onmouseout等； 移除用户上传的Style节点、Script节点、Iframe节点等。因为style可以控制页面显示形式，而script可以引入js文件，iframe可以引入外部资源、易植入广告、连接等； 同时，服务器端也要有过滤。例如ASP.NET应用服务器就提供了这种功能。在ASP.NET网页中，用户可以使用@Page指令的ValidateRequest属性来设置是否开启氢气验证，默认开启。例如在文章首部的攻击范例中可改为 &lt;%@Page Language=&quot;C#&quot;ResponseEncoding=&quot;utf-8&quot;ValidateRequest=&quot;True&quot;%&gt;. (3)校正 避免直接对HTML Entity解码 使用DOM Parse转换，校正不配对的DOM标签]]></content>
+      <url>/2017/05/03/article4/</url>
+      <content type="html"><![CDATA[<h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h3><p>　XSS，即跨站脚本攻击。指攻击者在web页面中插入恶意的脚本代码，当用户浏览该页时，嵌入web里面的脚本代码被执行，从而达到攻击者的目的。<br>　　看一个简单的跨站脚本攻击范例：<br>　　以下代码使用ASP.NET接收一个传送的参数，并将其显示出来：</p>
+<pre><code>&lt;%@Page Language=&quot;C#&quot; ResponseEncoding=&quot;utf-8&quot; ValidateRequest=&quot;False&quot;%&gt;
+&lt;%
+ string scriptSring = Request.QueryString[0];
+ Response.Write(scriptString);
+ %&gt;
+</code></pre><p>　　这是一个简单的动态网页，正常情况下没有问题，但如果有恶意者使用下面的网址请求：<br><a id="more"></a><br>    <a href="http://localhost/test.aspx?" target="_blank" rel="external">http://localhost/test.aspx?</a><script>alert(“hi!XSS is here”);</script><br>　　则页面会出现：<br>　　<img src="/img/6.jpg" alt=""><br>　　由于没有对输入的请求进行验证就进行了输出，从而会执行客户端脚本代码。如果某个地址是别人通过“骗你”单击一个连接发起的，并且客户端脚本代码是用来获取你的会话和Cookie的，那么你的信息就被窃取并被提交到攻击者的web站点，从而被非法利用。
+　　</p>
+<h3 id="2-XSS的攻击方式"><a href="#2-XSS的攻击方式" class="headerlink" title="2.XSS的攻击方式"></a>2.XSS的攻击方式</h3><p>(1).反射型<br>　　发出请求时，XSS代码出现在URL中，作为输入提交到服务器端，服务器端解析后响应，XSS代码随响应内容一起传回给浏览器，最后浏览器解析执行XSS代码。此过程像一次反射，故叫反射型CSS。<br>　<br>(2).存储型<br>　　存储型XSS和反射型XSS差别仅在于，提交的代码会存储在服务器端（数据库，内存，文件系统等），下次请求目标页面时不用再提交XSS代码。
+　　</p>
+<h3 id="3-如何防范XSS"><a href="#3-如何防范XSS" class="headerlink" title="3.如何防范XSS"></a>3.如何防范XSS</h3><p>　　<br>　　XSS的防御方法，只要有以下三种：<br>(1).编码<br>　　将输入的字符进行转义，需要引入ecode.js库。<br>　　<img src="/img/7.png" alt=""><br>(2)过滤（客户端）：<br>　　移除用户上传的DOM属性，如onerror、onclick、onmouseout等；<br>　　移除用户上传的Style节点、Script节点、Iframe节点等。因为style可以控制页面显示形式，而script可以引入js文件，iframe可以引入外部资源、易植入广告、连接等；<br>　　同时，服务器端也要有过滤。例如ASP.NET应用服务器就提供了这种功能。在ASP.NET网页中，用户可以使用@Page指令的ValidateRequest属性来设置是否开启氢气验证，默认开启。例如在文章首部的攻击范例中可改为</p>
+<pre><code>&lt;%@Page Language=&quot;C#&quot;ResponseEncoding=&quot;utf-8&quot;ValidateRequest=&quot;True&quot;%&gt;.
+</code></pre><p>(3)校正<br>　　避免直接对HTML Entity解码<br>　　使用DOM Parse转换，校正不配对的DOM标签</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> web安全 </tag>
+            
+        </tags>
+        
     </entry>
-
     
     <entry>
       <title><![CDATA[闭包]]></title>
-      <url>%2F2017%2F05%2F01%2Farticle3%2F</url>
-      <content type="text"><![CDATA[1.从作用域讲起 js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。 注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。 2.闭包定义 闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义了一些本地变量，当该函数被调用时，仍可以使用这些本地变量。 3.闭包(函数)的两种基本类型 (1)作为值从函数返回的函数就是闭包函数 例如：闭包函数A()位于一个特定的环境中（即函数B()中），并作为值从函数B()返回： function B() { var temp = “abc”; //本地变量 function A() //闭包函数 { alert(“闭包函数处理本地变量temp的值：” + temp); } return A; //返回闭包函数 } var myFunc = B(); //调用函数B()，返回的是闭包函数A() myFunc(); //调用闭包函数A(),结果返回”闭包函数处理本地变量temp的值：abc” 分析：myFunc()调用是在函数B()外边，按照规定，它不应该再返回到本地变量temp，但实际上仍可以访问到，这就是闭包函数的作用。 (2)利用变量作用范围也可以形成闭包函数 一般来讲，作为参数传递给函数的函数或作为值从函数返回的函数都是闭包函数。同时，利用变量作用范围也可以形成闭包函数，例如“ var F; function B() { var temp = &quot;abc&quot;; F = function() { alert(&quot;闭包函数处理本地变量temp的值：&quot; + temp); } } B(); //调用函数B()为变量F赋值； F(); //调用闭包函数F() 分析，闭包函数F()的调用虽不在函数B()的局部作用范围内，但仍可以访问到temp。 注意：自由变量跨作用域取值时，要去创建这个函数的作用域取值，而不是“父作用域”。（其他篇章再分析） 4.闭包函数的总结 (1)用处：一是可以读取函数内部的变量，二是可以让这些变量的值始终保持在内存中，不会让其被调用后被自动清除。 关于第二个用处的解释：B()是A()的父函数，而A()被赋给了一个全局变量，这导致A()始终在内存中，而A()的存在依赖于B()，因此B()也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。 (2)缺点：一是内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。 二是闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。]]></content>
+      <url>/2017/05/01/article3/</url>
+      <content type="html"><![CDATA[<h3 id="1-从作用域讲起"><a href="#1-从作用域讲起" class="headerlink" title="1.从作用域讲起"></a>1.从作用域讲起</h3><p>　　js中作用域可分为：全局变量和局部变量。且规定：函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。闭包的产生使得能在函数外部获取函数内部的局部变量。</p>
+<p>　　注意：在函数内部声明变量时，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量。</p>
+<h3 id="2-闭包定义"><a href="#2-闭包定义" class="headerlink" title="2.闭包定义"></a>2.闭包定义</h3><p>　　闭包是一个函数，通常也被称为闭包函数。该函数运行在一个特定的环境中，该环境中定义了一些本地变量，当该函数被调用时，仍可以使用这些本地变量。</p>
+<h3 id="3-闭包-函数-的两种基本类型"><a href="#3-闭包-函数-的两种基本类型" class="headerlink" title="3.闭包(函数)的两种基本类型"></a>3.闭包(函数)的两种基本类型</h3><p>　　(1)作为值从函数返回的函数就是闭包函数<br>　　例如：闭包函数A()位于一个特定的环境中（即函数B()中），并作为值从函数B()返回：<br><a id="more"></a><br>    function B()<br>    {<br>        var temp = “abc”; //本地变量<br>       function A() //闭包函数<br>      {<br>        alert(“闭包函数处理本地变量temp的值：” + temp);<br>      }<br>        return A; //返回闭包函数<br>    }<br>        var myFunc = B(); //调用函数B()，返回的是闭包函数A()<br>        myFunc(); //调用闭包函数A(),结果返回”闭包函数处理本地变量temp的值：abc”</p>
+<p>　　分析：myFunc()调用是在函数B()外边，按照规定，它不应该再返回到本地变量temp，但实际上仍可以访问到，这就是闭包函数的作用。</p>
+<p>　　(2)利用变量作用范围也可以形成闭包函数<br>　　　一般来讲，作为参数传递给函数的函数或作为值从函数返回的函数都是闭包函数。同时，利用变量作用范围也可以形成闭包函数，例如“</p>
+<pre><code>var F;
+function B()
+{
+  var temp = &quot;abc&quot;;
+  F = function()
+  {
+    alert(&quot;闭包函数处理本地变量temp的值：&quot; + temp);
+  }
+}
+B(); //调用函数B()为变量F赋值；
+F(); //调用闭包函数F()
+</code></pre><p>　　分析，闭包函数F()的调用虽不在函数B()的局部作用范围内，但仍可以访问到temp。<br>　　注意：自由变量跨作用域取值时，要去创建这个函数的作用域取值，而不是“父作用域”。（其他篇章再分析）
+　　</p>
+<h3 id="4-闭包函数的总结"><a href="#4-闭包函数的总结" class="headerlink" title="4.闭包函数的总结"></a>4.闭包函数的总结</h3><p>　　(1)用处：一是可以读取函数内部的变量，二是可以让这些变量的值始终保持在内存中，不会让其被调用后被自动清除。<br>　　关于第二个用处的解释：B()是A()的父函数，而A()被赋给了一个全局变量，这导致A()始终在内存中，而A()的存在依赖于B()，因此B()也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。</p>
+<p>　　(2)缺点：一是内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。<br>　　二是闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。
+　　</p>
+]]></content>
+      
+        <categories>
+            
+            <category> web前端 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Javscript </tag>
+            
+        </tags>
+        
     </entry>
-
     
     <entry>
       <title><![CDATA[this的值是什么]]></title>
-      <url>%2F2017%2F05%2F01%2Farticle2%2F</url>
-      <content type="text"><![CDATA[1.函数调用 首先需要从函数的调用开始讲起。 JS（ES5）里面有三种函数调用形式： func(p1, p2) obj.child.method(p1, p2) func.call(context, p1, p2) // 先不讲 apply 前面两种是常见的形式，其实后一种才是正常调用形式： func.call(context, p1, p2) 前两种可以等价地变为 call 形式： func(p1, p2) 等价于 func.call(undefined, p1, p2) obj.child.method(p1, p2) 等价于 obj.child.method.call(obj.child, p1, p2) 请记下来。（我们称此代码为「转换代码」，方便下文引用） 至此我们的函数调用只有一种形式： func.call(context, p1, p2) 这样，this 就好解释了–this，就是上面代码中的 context。就这么简单。 先看 func(p1, p2) 中的 this 如何确定： 当你写下面代码时 function func(){ console.log(this) } func()等价于： function func(){ console.log(this) } func.call(undefined) // 可以简写为 func.call() 按理说打印出来的 this 应该就是 undefined 了吧，但是浏览器里有一条规则： 如果你传的 context 就 null 或者 undefined，那么 window 对象就是默认的 context（严格模式下默认 context 是 undefined） 因此上面的打印结果是 window。 如果你希望这里的 this 不是 window，很简单： func.call(obj) // 那么里面的 this 就是 obj 对象了 再看 obj.child.method(p1, p2) 的 this 如何确定 var obj = { foo: function(){ console.log(this) } } obj.foo() 按照「转换代码」，我们将 obj.foo() 转换为 obj.foo.call(obj) 好了，this 就是 obj。搞定。 回到题目： var obj = { foo: function(){ console.log(this) } } var bar = obj.foo obj.foo() // 转换为obj.foo.call(obj)，this 就是 obj bar() // 转换为 bar.call() // 由于没有传 context // 所以 this 就是 undefined // 最后浏览器给你一个默认的 this —— window 对象 [ ] 语法 function fn (){ console.log(this) } var arr = [fn, fn2] arr[0]() // 这里面的 this 又是什么呢？ 我们可以把 arr0 想象为arr.0( )，虽然后者的语法错了，但是形式与转换代码里的 obj.child.method(p1, p2) 对应上了，于是就可以愉快的转换了： arr0，假想为 arr.0()然后转换为 arr.0.call(arr)那么里面的 this 就是 arr 了 :) 总结 this 就是你 call 一个函数时，传入的 context。 如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。 2.this机制的四种规则 this到底绑定或者引用的是哪个对象环境决定于函数被调用的地方。而函数的调用有不同的方式，在不同的方式中调用决定this引用的是哪个对象是由四种规则确定的。我们一个个来看。 2.1 默认绑定全局变量 这条规则是最常见的，也是默认的。当函数被单独定义和调用的时候，应用的规则就是绑定全局变量。如下： function fn() { console.log( this.a ); } var a = 2; fn(); // 2 -- fn单独调用，this引用window 2.2 隐式绑定 隐式调用的意思是，函数调用时拥有一个上下文对象，就好像这个函数是属于该对象的一样。例如： function fn() { console.log( this.a ); } var obj = { a: 2, fn: fn }; obj.fn(); // 2 -- this引用obj。 需要说明的一点是，最后一个调用该函数的对象是传到函数的上下文对象（绕懵了）。如： function fn() { console.log( this.a ); } var obj2 = { a: 42, fn: fn }; var obj1 = { a: 2, obj2: obj2 }; obj1.obj2.fn(); // 42 -- this引用的是obj2. 还有一点要说明的是，失去隐式绑定的情况，如下： function fn() { console.log( this.a ); } var obj = { a: 2, fn: fn }; var bar = obj.fn; // 函数引用传递 var a = &quot;全局&quot;; // 定义全局变量 bar(); // &quot;全局&quot; 如上，第8行虽然有隐式绑定，但是它执行的效果明显是把fn赋给bar。这样bar执行的时候，依然是默认绑定全局变量，所以输出结果如上。 2.3 显示绑定 学过bind()\apply()\call()函数的都应该知道，它接收的第一个参数即是上下文对象并将其赋给this。看下面的例子： function fn() { console.log( this.a ); } var obj = { a: 2 }; fn.call( obj ); // 2 如果我们传递第一个值为简单值，那么后台会自动转换为对应的封装对象。如果传递为null，那么结果就是在绑定默认全局变量，如： function fn() { console.log( this.a ); } var obj = { a: 2 }; var a = 10; fn.call( null); // 10 2.4 new新对象绑定 如果是一个构造函数，那么用new来调用，那么绑定的将是新创建的对象。如： function fn(a) { this.a = a; } var bar = new fn( 2 ); console.log( bar.a );// 2 注意，一般构造函数名首字母大写，这里没有大写的原因是想提醒读者，构造函数也是一般的函数而已。]]></content>
-    </entry>
+      <url>/2017/05/01/article2/</url>
+      <content type="html"><![CDATA[<h3 id="1-函数调用"><a href="#1-函数调用" class="headerlink" title="1.函数调用"></a>1.函数调用</h3><p>　　首先需要从函数的调用开始讲起。</p>
+<p>JS（ES5）里面有三种函数调用形式：</p>
+<pre><code>func(p1, p2)
+obj.child.method(p1, p2)
+func.call(context, p1, p2) // 先不讲 apply
+</code></pre><p>　　前面两种是常见的形式，其实后一种才是正常调用形式：</p>
+<pre><code>func.call(context, p1, p2)
+</code></pre><a id="more"></a>
+<p>　　前两种可以等价地变为 call 形式：</p>
+<pre><code>func(p1, p2) 等价于
+func.call(undefined, p1, p2)
 
+obj.child.method(p1, p2) 等价于
+obj.child.method.call(obj.child, p1, p2)
+</code></pre><p>　　请记下来。（我们称此代码为「转换代码」，方便下文引用）</p>
+<p>　　至此我们的函数调用只有一种形式：</p>
+<pre><code>func.call(context, p1, p2)
+</code></pre><p>　　这样，this 就好解释了–this，就是上面代码中的 context。就这么简单。</p>
+<p>　　先看 func(p1, p2) 中的 this 如何确定：</p>
+<p>　　当你写下面代码时</p>
+<pre><code>function func(){
+  console.log(this)
+}
+
+func()等价于：
+
+function func(){
+  console.log(this)
+}
+
+ func.call(undefined) // 可以简写为 func.call()
+</code></pre><p>　　按理说打印出来的 this 应该就是 undefined 了吧，但是浏览器里有一条规则：</p>
+<p>　　如果你传的 context 就 null 或者 undefined，那么 window 对象就是默认的 context（严格模式下默认 context 是 undefined）<br>　　因此上面的打印结果是 window。</p>
+<p>　　如果你希望这里的 this 不是 window，很简单：</p>
+<p>func.call(obj) // 那么里面的 this 就是 obj 对象了</p>
+<p>再看 obj.child.method(p1, p2) 的 this 如何确定</p>
+<pre><code>var obj = {
+  foo: function(){
+console.log(this)
+  }
+}
+
+obj.foo()
+</code></pre><p>按照「转换代码」，我们将 obj.foo() 转换为</p>
+<pre><code>obj.foo.call(obj)
+</code></pre><p>好了，this 就是 obj。搞定。</p>
+<p>回到题目：</p>
+<pre><code>var obj = {
+  foo: function(){
+    console.log(this)
+  }
+}
+
+var bar = obj.foo
+obj.foo() // 转换为obj.foo.call(obj)，this 就是 obj
+
+bar()
+// 转换为 bar.call()
+// 由于没有传 context
+// 所以 this 就是 undefined
+// 最后浏览器给你一个默认的 this —— window 对象
+</code></pre><p>[ ] 语法</p>
+<pre><code>function fn (){ console.log(this) }
+var arr = [fn, fn2]
+arr[0]() // 这里面的 this 又是什么呢？
+</code></pre><p>　　我们可以把 arr<a href="">0</a> 想象为arr.0( )，虽然后者的语法错了，但是形式与转换代码里的 obj.child.method(p1, p2) 对应上了，于是就可以愉快的转换了：</p>
+<p>  arr<a href="">0</a>，假想为    arr.0()<br>然后转换为 arr.0.call(arr)<br>那么里面的 this 就是 arr 了 :) </p>
+<p>总结</p>
+<p>　　this 就是你 call 一个函数时，传入的 context。<br>　　如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。</p>
+<h3 id="2-this机制的四种规则"><a href="#2-this机制的四种规则" class="headerlink" title="2.this机制的四种规则"></a>2.this机制的四种规则</h3><p>　　this到底绑定或者引用的是哪个对象环境决定于函数被调用的地方。而函数的调用有不同的方式，在不同的方式中调用决定this引用的是哪个对象是由四种规则确定的。我们一个个来看。<br>　　<br>2.1 默认绑定全局变量</p>
+<p>　　这条规则是最常见的，也是默认的。当函数被单独定义和调用的时候，应用的规则就是绑定全局变量。如下：</p>
+<pre><code>function fn() {
+console.log( this.a );
+}
+var a = 2;
+fn(); // 2 -- fn单独调用，this引用window
+</code></pre><p>2.2 隐式绑定</p>
+<p>　　隐式调用的意思是，函数调用时拥有一个上下文对象，就好像这个函数是属于该对象的一样。例如：</p>
+<pre><code>function fn() {
+console.log( this.a );
+}
+var obj = {
+a: 2,
+fn: fn
+};
+obj.fn(); // 2 -- this引用obj。
+</code></pre><p>　　需要说明的一点是，最后一个调用该函数的对象是传到函数的上下文对象（绕懵了）。如：</p>
+<pre><code>function fn() {
+console.log( this.a );
+}
+var obj2 = {
+a: 42,
+fn: fn
+};
+var obj1 = {
+a: 2,
+obj2: obj2
+};
+obj1.obj2.fn(); // 42 -- this引用的是obj2.
+</code></pre><p>　　还有一点要说明的是，失去隐式绑定的情况，如下：</p>
+<pre><code>function fn() {
+console.log( this.a );
+}
+var obj = {
+a: 2,
+fn: fn
+};
+var bar = obj.fn; // 函数引用传递
+var a = &quot;全局&quot;; // 定义全局变量
+bar(); // &quot;全局&quot;
+</code></pre><p>　　如上，第8行虽然有隐式绑定，但是它执行的效果明显是把fn赋给bar。这样bar执行的时候，依然是默认绑定全局变量，所以输出结果如上。</p>
+<p>2.3 显示绑定</p>
+<p>　　学过bind()\apply()\call()函数的都应该知道，它接收的第一个参数即是上下文对象并将其赋给this。看下面的例子：</p>
+<pre><code>function fn() {
+console.log( this.a );
+}
+var obj = {
+a: 2
+};
+fn.call( obj ); // 2
+</code></pre><p>　　如果我们传递第一个值为简单值，那么后台会自动转换为对应的封装对象。如果传递为null，那么结果就是在绑定默认全局变量，如：</p>
+<pre><code>function fn() {
+ console.log( this.a );
+}
+var obj = {
+ a: 2
+};
+var a = 10;
+fn.call( null); // 10
+</code></pre><p>2.4 new新对象绑定</p>
+<p>　　如果是一个构造函数，那么用new来调用，那么绑定的将是新创建的对象。如：</p>
+<pre><code>function fn(a) {
+this.a = a;
+}
+var bar = new fn( 2 );
+console.log( bar.a );// 2
+</code></pre><p>　　注意，一般构造函数名首字母大写，这里没有大写的原因是想提醒读者，构造函数也是一般的函数而已。
+　</p>
+]]></content>
+      
+        <categories>
+            
+            <category> web前端 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Javscript </tag>
+            
+        </tags>
+        
+    </entry>
     
     <entry>
       <title><![CDATA[如何用Hexo和Github搭建个人博客]]></title>
-      <url>%2F2017%2F04%2F22%2Farticle1%2F</url>
-      <content type="text"><![CDATA[前言——关于为什么搭建个人博客 很多人都用过QQ空间和微博，虽然它们可以满足我们发表日志、照片等动态的需求，但是其界面基本大同小异。而个人博客则可以由我们自身个性化地行搭建装饰，你可以在上面诉说你的生活琐事，也可以发表你对行业的独特见解。作为想要立志在互联网行业拼搏的人，博客的搭建是你对所学知识应用的开始，而运营博客则体现一个人的水平及修养。 步骤说明 1.什么是Hexo? Hexo是一个开源的静态博客生成器,用node.js开发。Hexo 使用Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 2.从配置Github开始 首先注册或登录github.com，记住自己的用户名，之后点击右上角Create a new repository， 配置生成自己仓库，其中yourname.github.io就是你的博客域名，例如我的域名是http://github.com/youglin 3.环境安装（node.js、git bash和文本编辑器） （1）Node.js可在其官网根据自己电脑的配置进行安装就行了。但是git for windows直接从国内官网下载比较困难，我的做法是下载一个翻墙软件（叫什么加速器来着），可以免费使用一小时，用它下载git bash。文本编辑器我推荐的是Notepad++，用来更改配置文件。 安装好之后在cmd面板中输入命令检查是否安装成功，如下： 安装成功之后，git bash需要进行一些配置，大概就是下面一些命令，如不明白请自行搜索。 git config --global user.email email为你注册Github时的邮箱地址 git config --global user.name name为你注册Github时的用户名 ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot; 接着系统生成ssh，在Blog中找到.ssh文件夹打开（Notepad++），复制里面内容，登陆github，依次点击settings － SSH keys － add ssh keys（把上面复制的内容全部添加进去即可） 4.安装hexo 在cmd面板中输入 : npm install -g hexo-cli 看到相关的成功提示后即可。 5.生成hexo 在电脑D盘（自己定）新建文件夹Blog，打开Blog，按住Shift键点击鼠标右键，再点击“在此处打开命令窗口”，输入： hexo init blog 稍等之后，系统成功提示： INFO Start blogging with Hexo! 此后，hexo指的就是你的Blog文件夹里的文件。hexo生成之后其source目录中带有一篇hello world的文章，接着你在面板中执行 hexo generate（也可写作hexo g，表示生成新内容） 再启动本地服务器： hexo server 之后在浏览器输入http://localhost:4000/就可以看见网页和模板了。系统成功提示： INFO Start processing INFO Hexo is running at http://localhost:4000/. Press Ctrl+C to stop. 6.将博客发布到Github （1）部署之前先修改Blog/_config.yml文件（冒号后面一定要有空格，如下面”type:”和”git”之间有空格。） deploy: type: git repository: https://github.com/youglin/youglin.github.io.git (youglin替换为你自己的用户名) branch: master （2）进行发布，即在面板中输入： hexo deploy 注：如果执行上述命令报错，你可以试试下面这个命令再试。 npm install hexo-deployer-git--save （3）部署成功后，你在浏览器中输入youglin.github.io，就能看到和本地一样的效果了。(youglin改为你的用户名） 注意： 如果使用cmd面板发布博客过程报错，从官网下载Github桌面版，解压安装到指定文件夹之后，在桌面会生成如下两个快捷方式： 其中Git Shell可用来代替cmd面板发布博客，Github可用于将hexo文件上传到你的线上Github仓库中，方法可自行搜索。 7.配置博客 在Blog目录下，用Notepad++打开_config.yml文件，参数信息如下： # Hexo Configuration ## Docs: http://hexo.io/docs/configuration.html ## Source: https://github.com/hexojs/hexo/ # Site #站点信息 title: #标题 subtitle: #副标题 description: #站点描述，给搜索引擎看的 author: #作者 email: #电子邮箱 language: zh-CN #语言 # URL #链接格式 url: #网址 root: / #根目录 ...... 特别提醒，在每个参数的：后都要加一个空格 修改网站相关信息: title: 你的博客标题subtitle: 副标题description: 网页描述author: 林language: zh-CNtimezone: #这里不要改动，保持默认状态 8.更改主题 hexo默认的主题为landscape，相信很多人都觉得不够炫，网上有很多的hexo主题，我用的是Next，其配置方式较为简单，直接在Next官网根据其提示进行相应的操作即可。 9.发表新文章 在cmd（如果不行，用Git Shell)中输入： cd D:\test（定位到hexo目录中） hexo new &quot;新文章标题&quot; 系统提示：INFO Created: D:\test\source\_posts\新文章标题.md 在该目录下找到该文章，打开，使用Markdown语法，该语法介绍可以上网查看。 --- title: 崔斯特测试文章 date: 2017-02-28 13:03:44 tags: --- 这是一篇测试文章，欢迎关注作者博客[1]: https://youglin.github.io/ 保存文章更改，然后执行下列步骤： hexo generate INFO Start processing INFO Files loaded in 1.48 s #省略 INFO 29 files generated in 4.27 s cd D:\test hexo server INFO Start processing INFO Hexo is running at http://localhost:4000/. Press Ctrl+C to stop. 再发布到网上 cd D:\test hexo deploy INFO Deploying: git INFO Clearing .deploy_git folder... INFO Copying files from public folder... #省略 10.总结 1.为什么我的博客网址显示的是www.yourlin.cn我不是youglin.github.io，因为yourlin.cn是我在腾讯云的域名，并且我把Github中博客的域名youglin.github.io映射到了www.yourlin.cn中，因此两个都可以访问到。 2.这也是我第一次搭建个人博客，前后用了几天时间，看了网上的很多教程，也请教了我的同学，还有很多功能需要去完善和开发，一起努力吧！]]></content>
-    </entry>
+      <url>/2017/04/22/article1/</url>
+      <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>——关于为什么搭建个人博客<br>　　很多人都用过QQ空间和微博，虽然它们可以满足我们发表日志、照片等动态的需求，但是其界面基本大同小异。而个人博客则可以由我们自身个性化地行搭建装饰，你可以在上面诉说你的生活琐事，也可以发表你对行业的独特见解。作为想要立志在互联网行业拼搏的人，博客的搭建是你对所学知识应用的开始，而运营博客则体现一个人的水平及修养。</p>
+<hr>
+<h3 id="步骤说明"><a href="#步骤说明" class="headerlink" title="步骤说明"></a>步骤说明</h3><blockquote>
+<p><strong>1.什么是Hexo?</strong></p>
+</blockquote>
+<p>　　Hexo是一个开源的静态博客生成器,用node.js开发。Hexo 使用Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。<br><a id="more"></a>　</p>
+<blockquote>
+<p><strong>2.从配置Github开始</strong></p>
+</blockquote>
+<p>　　首先注册或登录github.com，记住自己的用户名，之后点击右上角Create a new repository，<img src="/img/1.png" alt=""><br>　　配置生成自己仓库，其中yourname.github.io就是你的博客域名，例如我的域名是<a href="http://github.com/youglin" target="_blank" rel="external">http://github.com/youglin</a><br>　　<img src="/img/4.jpg" alt=""></p>
+<blockquote>
+<p><strong>3.环境安装（node.js、git bash和文本编辑器）</strong></p>
+</blockquote>
+<p>　（1）Node.js可在其官网根据自己电脑的配置进行安装就行了。但是git for windows直接从国内官网下载比较困难，我的做法是下载一个翻墙软件（叫什么加速器来着），可以免费使用一小时，用它下载git bash。文本编辑器我推荐的是Notepad++，用来更改配置文件。<br>　安装好之后在cmd面板中输入命令检查是否安装成功，如下：<img src="/img/2.jpg" alt=""><br>　<br>　安装成功之后，git bash需要进行一些配置，大概就是下面一些命令，如不明白请自行搜索。</p>
+<pre><code>git config --global user.email 
+</code></pre><p>  email为你注册Github时的邮箱地址</p>
+<pre><code>git config --global user.name 
+</code></pre><p> name为你注册Github时的用户名</p>
+<pre><code>ssh-keygen -t rsa -C &quot;Github的注册邮箱地址&quot;
+</code></pre><p>接着系统生成ssh，在Blog中找到.ssh文件夹打开（Notepad++），复制里面内容，登陆github，依次点击settings － SSH keys  － add ssh keys（把上面复制的内容全部添加进去即可）</p>
+<blockquote>
+<p><strong>4.安装hexo</strong></p>
+</blockquote>
+<p>　　在cmd面板中输入 :</p>
+<pre><code>npm install -g hexo-cli
+</code></pre><p>　　看到相关的成功提示后即可。</p>
+<blockquote>
+<p><strong>5.生成hexo</strong></p>
+</blockquote>
+<p>　　在电脑D盘（自己定）新建文件夹Blog，打开Blog，按住Shift键点击鼠标右键，再点击“在此处打开命令窗口”，输入：</p>
+<pre><code>hexo init blog
+</code></pre><p>稍等之后，系统成功提示：</p>
+<pre><code>INFO  Start blogging with Hexo!
+</code></pre><p>　　<br>此后，hexo指的就是你的Blog文件夹里的文件。hexo生成之后其source目录中带有一篇hello world的文章，接着你在面板中执行</p>
+<pre><code>hexo generate（也可写作hexo g，表示生成新内容）
 
+再启动本地服务器：
+
+hexo server
+
+之后在浏览器输入http://localhost:4000/就可以看见网页和模板了。系统成功提示：
+
+INFO  Start processing
+INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
+</code></pre><p><img src="/img/3.jpg" alt=""></p>
+<blockquote>
+<p><strong>6.将博客发布到Github</strong></p>
+</blockquote>
+<p>（1）部署之前先修改Blog/_config.yml文件（冒号后面一定要有空格，如下面”type:”和”git”之间有空格。）</p>
+<pre><code>deploy:
+  type: git
+  repository: https://github.com/youglin/youglin.github.io.git  (youglin替换为你自己的用户名)
+  branch: master
+</code></pre><p>（2）进行发布，即在面板中输入：</p>
+<pre><code>hexo deploy
+</code></pre><p>注：如果执行上述命令报错，你可以试试下面这个命令再试。</p>
+<pre><code>npm install hexo-deployer-git--save
+</code></pre><p>（3）部署成功后，你在浏览器中输入youglin.github.io，就能看到和本地一样的效果了。(youglin改为你的用户名）</p>
+<p><strong>注意：</strong> 如果使用cmd面板发布博客过程报错，从官网下载Github桌面版，解压安装到指定文件夹之后，在桌面会生成如下两个快捷方式：<br><img src="/img/5.jpg" alt=""></p>
+<p>其中Git Shell可用来代替cmd面板发布博客，Github可用于将hexo文件上传到你的线上Github仓库中，方法可自行搜索。</p>
+<blockquote>
+<p><strong>7.配置博客</strong></p>
+</blockquote>
+<p>在Blog目录下，用Notepad++打开_config.yml文件，参数信息如下：</p>
+<pre><code># Hexo Configuration
+## Docs: http://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+# Site #站点信息
+title:  #标题
+subtitle:  #副标题
+description:  #站点描述，给搜索引擎看的
+author:  #作者
+email:  #电子邮箱
+language: zh-CN #语言
+# URL #链接格式
+url:  #网址
+root: / #根目录
+......
+</code></pre><p><strong>特别提醒，在每个参数的：后都要加一个空格</strong></p>
+<p><strong>修改网站相关信息:</strong></p>
+<p>title: 你的博客标题<br>subtitle: 副标题<br>description: 网页描述<br>author: 林<br>language: zh-CN<br>timezone: #这里不要改动，保持默认状态</p>
+<blockquote>
+<p><strong>8.更改主题</strong></p>
+</blockquote>
+<p>　　hexo默认的主题为landscape，相信很多人都觉得不够炫，网上有很多的hexo主题，我用的是Next，其配置方式较为简单，直接在Next官网根据其提示进行相应的操作即可。
+　　</p>
+<blockquote>
+<p><strong>9.发表新文章</strong></p>
+</blockquote>
+<p>在cmd（如果不行，用Git Shell)中输入：</p>
+<pre><code>cd D:\test（定位到hexo目录中）
+hexo new &quot;新文章标题&quot;
+系统提示：INFO  Created: D:\test\source\_posts\新文章标题.md
+</code></pre><p>在该目录下找到该文章，打开，使用Markdown语法，该语法介绍可以上网查看。</p>
+<pre><code>---
+title: 崔斯特测试文章
+date: 2017-02-28 13:03:44
+tags:
+---
+这是一篇测试文章，欢迎关注作者博客[1]: https://youglin.github.io/
+</code></pre><p>保存文章更改，然后执行下列步骤：</p>
+<pre><code>hexo generate
+INFO  Start processing
+INFO  Files loaded in 1.48 s
+#省略
+INFO  29 files generated in 4.27 s
+
+cd D:\test
+hexo server
+INFO  Start processing
+INFO  Hexo is running at     http://localhost:4000/. Press Ctrl+C to stop.
+</code></pre><p><strong>再发布到网上</strong></p>
+<pre><code>cd D:\test
+hexo deploy
+INFO  Deploying: git
+INFO  Clearing .deploy_git folder...
+INFO  Copying files from public folder...
+#省略
+</code></pre><blockquote>
+<p><strong>10.总结</strong></p>
+</blockquote>
+<p>　　1.为什么我的博客网址显示的是www.yourlin.cn我不是youglin.github.io，因为yourlin.cn是我在腾讯云的域名，并且我把Github中博客的域名youglin.github.io映射到了www.yourlin.cn中，因此两个都可以访问到。<br>　　2.这也是我第一次搭建个人博客，前后用了几天时间，看了网上的很多教程，也请教了我的同学，还有很多功能需要去完善和开发，一起努力吧！</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
     
     <entry>
       <title><![CDATA[Hello World]]></title>
-      <url>%2F2017%2F04%2F20%2Fhello-world%2F</url>
-      <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <url>/2017/04/20/hello-world/</url>
+      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+      
+        
     </entry>
-
     
   
   
