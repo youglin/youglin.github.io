@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>朝花夕拾</title>
-  <subtitle>林优钢的个人博客</subtitle>
+  <subtitle>林友钢的个人博客</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
@@ -9,7 +9,7 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>林优钢</name>
+    <name>林友钢</name>
     
   </author>
   
