@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="缓存," />
 
 
 
@@ -87,16 +87,20 @@
 
 
 
-<meta name="description" content="我叫林友钢，来自华南师范大学信息工程系。目前正努力学习web前端中，目标是成为小牛。生活中，我喜欢观察和学习新的事物，对互联网行业较感兴趣。有自己Github账号，喜欢刷知乎、逛论坛博客。　　　　以下是我的个人经历：　　1.2016/05- 2017/05（科研立项）　参与应用于虚拟现实3D互动教学的人机交互技术的研究　作为为团队成员之一，负责控制音频、声频等C#脚本的编写，再将其导入u">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于我">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="浏览器缓存机制，主要可以分为两大类。一是HTTP协议定义的缓存机制；二是非HTTP协议定义的缓存机制。下面以Pragma为例先说下后者。 一、Pragma（非HTTP协议定义的）　　　Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签（而且可能还得做些hack放到body后面去）： &amp;lt;meta http-equiv=&amp;quot;Pragma&amp;quo">
+<meta name="keywords" content="缓存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器缓存机制">
+<meta property="og:url" content="http://yoursite.com/2017/05/20/article6/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="我叫林友钢，来自华南师范大学信息工程系。目前正努力学习web前端中，目标是成为小牛。生活中，我喜欢观察和学习新的事物，对互联网行业较感兴趣。有自己Github账号，喜欢刷知乎、逛论坛博客。　　　　以下是我的个人经历：　　1.2016/05- 2017/05（科研立项）　参与应用于虚拟现实3D互动教学的人机交互技术的研究　作为为团队成员之一，负责控制音频、声频等C#脚本的编写，再将其导入u">
-<meta property="og:updated_time" content="2017-05-20T04:47:52.995Z">
+<meta property="og:description" content="浏览器缓存机制，主要可以分为两大类。一是HTTP协议定义的缓存机制；二是非HTTP协议定义的缓存机制。下面以Pragma为例先说下后者。 一、Pragma（非HTTP协议定义的）　　　Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签（而且可能还得做些hack放到body后面去）： &amp;lt;meta http-equiv=&amp;quot;Pragma&amp;quo">
+<meta property="og:image" content="http://yoursite.com/img/6.1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/6.2.jpg">
+<meta property="og:updated_time" content="2017-05-20T14:19:09.568Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于我">
-<meta name="twitter:description" content="我叫林友钢，来自华南师范大学信息工程系。目前正努力学习web前端中，目标是成为小牛。生活中，我喜欢观察和学习新的事物，对互联网行业较感兴趣。有自己Github账号，喜欢刷知乎、逛论坛博客。　　　　以下是我的个人经历：　　1.2016/05- 2017/05（科研立项）　参与应用于虚拟现实3D互动教学的人机交互技术的研究　作为为团队成员之一，负责控制音频、声频等C#脚本的编写，再将其导入u">
+<meta name="twitter:title" content="浏览器缓存机制">
+<meta name="twitter:description" content="浏览器缓存机制，主要可以分为两大类。一是HTTP协议定义的缓存机制；二是非HTTP协议定义的缓存机制。下面以Pragma为例先说下后者。 一、Pragma（非HTTP协议定义的）　　　Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签（而且可能还得做些hack放到body后面去）： &amp;lt;meta http-equiv=&amp;quot;Pragma&amp;quo">
+<meta name="twitter:image" content="http://yoursite.com/img/6.1.jpg">
 
 
 
@@ -124,19 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/20/article6/"/>
 
 
 
 
 
-  <title>
-  
-
-  
-    关于我 | 朝花夕拾
-  
-</title>
+  <title> 浏览器缓存机制 | 朝花夕拾 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -171,7 +169,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -324,21 +322,261 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline">关于我</h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/20/article6/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="林友钢">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="朝花夕拾">
+    </span>
 
     
-    
-      <p>　　</p>
-<p>　　我叫林友钢，来自华南师范大学信息工程系。目前正努力学习web前端中，目标是成为小牛。生活中，我喜欢观察和学习新的事物，对互联网行业较感兴趣。有自己Github账号，喜欢刷知乎、逛论坛博客。<br>　　<br>　　以下是我的个人经历：<br>　<br>　1.2016/05- 2017/05（科研立项）<br>　参与<strong>应用于虚拟现实3D互动教学的人机交互技术的研究</strong><br>　作为为团队成员之一，负责控制音频、声频等C#脚本的编写，再将其导入unity3d，并完成团队其他相关工作。<br>　<br>　２.2016.12（比赛）<br>　参与<strong>基于大数据的运营商流失用户分析</strong><br> 　作为为团队成员之一，负责使用数据分析软件对数据进行预处理、撰写论文等工作，并完成团队其他相关工作。 </p>
-<p>　３.2016.05（比赛）<br>　参与<strong>深圳杯数学建模大赛</strong>并获得三等奖<br>　<br>　个人联系方式：<br>　<br>　邮箱：750235102@qq.com<br>　微信：13060504009<br>　Github：<a href="https://github.com/youglin" target="_blank" rel="external">https://github.com/youglin</a></p>
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                浏览器缓存机制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T22:17:33+08:00">
+                2017-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/浏览器/" itemprop="url" rel="index">
+                    <span itemprop="name">浏览器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/05/20/article6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/05/20/article6/" class="leancloud_visitors" data-flag-title="浏览器缓存机制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>浏览器缓存机制，主要可以分为两大类。一是HTTP协议定义的缓存机制；二是非HTTP协议定义的缓存机制。下面以Pragma为例先说下后者。</p>
+<p>一、Pragma（非HTTP协议定义的）<br>　<br>　　Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签（而且可能还得做些hack放到body后面去）：</p>
+<pre><code>&lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-cache&quot;&gt;
+</code></pre><p>　　“no-cache”命令即告诉浏览器每次请求时都不要读缓存，都要向服务器发一次请求。<br>　　<a id="more"></a><br>　　局限性：1. 仅有IE才能识别这段meta标签含义，其它主流浏览器仅能识别“Cache-Control: no-store”的meta标签（见出处）。<br>　　2. 在IE中识别到该meta标签含义，并不一定会在请求字段加上Pragma，但的确会让当前页面每次都发新请求（仅限页面，页面上的资源则不受影响）。</p>
+<p>二.HTTP协议定义的缓存机制</p>
+<p> 1.Expires<br>　Pragma用来禁用缓存，而Expires则是用来启用缓存和定义缓存时间首部字段。<br>　　同样在客户端我们可以使用meta标签来知会IE（也仅有IE能识别）页面（同样也只对页面有效，对页面上的资源无效）缓存时间：</p>
+<pre><code>&lt;meta http-equiv=&quot;expires&quot; content=&quot;mon, 18 apr 2016 14:30:00 GMT&quot;&gt;
+
+（取消缓存只需将content的值设为-1或0）
+</code></pre><p>　　<br>　　局限性：Expires 是HTTP 1.0的东西，现在默认浏览器均默认使用HTTP 1.1，所以它的作用基本忽略。<br>　　<br>　　注意：<br>　　优先级：Pragma&gt;Expires<br>　　<br>2.Cache-Control<br>　因为Expires的时间是相对服务器来说的，无法保证和客户端时间统一。HTTP1.1推出了新的通用首部字母Cache-Control来定义缓存过期时间。</p>
+<p>　　为了让服务器检验客户端现在存有的缓存文件是否跟其一样（以免因资源重复而浪费带宽），Http1.1新增了几个首部字段：<br>　　<br>2.1.Last-Modified<br>　服务器将资源传递给客户端时，会将资源最后更改的时间以“Last-Modified: GMT”的形式加在实体首部上一起返回给客户端。Last-Modified的值有两个：<br>　(1) If-Modified-Since：<br>　　该请求首部告诉服务器如果客户端传来的最后修改时间与服务器上的一致，则直接回送304 和响应报头即可。<br>　　当前各浏览器均是使用的该请求首部来向服务器传递保存的 Last-Modified 值。<br>　　<br>　(2) If-Unmodified-Since：<br>　　告诉服务器，若Last-Modified没有匹配上（资源在服务端的最后更新时间改变了），则应当返回412(Precondition Failed) 状态码给客户端<br>　　<br>　　Last-Modified的局限性：如果在服务器上，一个资源被修改了，但其实际内容根本没发生改变，会因为Last-Modified时间匹配不上而返回了整个实体给客户端（即使客户端缓存里有个一模一样的资源）。<br>　　<br>2.2.ETag<br>　为了解决上述Last-Modified可能存在的不准确的问题，Http1.1还推出了 ETag 实体首部字段。ETag值有两个：</p>
+<p>⑴ If-None-Matchf:<br>　告诉服务端如果 ETag 没匹配上需要重发资源数据，否则直接回送304 和响应报头即可。<br>　　当前各浏览器均是使用的该请求首部来向服务器传递保存的 ETag 值。<br>　　<br>(2)If-Match:<br>　告诉服务器如果没有匹配到ETag，或者收到了“*”值而当前并没有该资源实体，则应当返回412(Precondition Failed) 状态码给客户端。否则服务器直接忽略该字段。<br>　　If-Match的一个应用场景是，客户端走PUT方法向服务端请求上传/更替资源，这时候可以通过 If-Match 传递资源的ETag。<br>　　<br>三、有Last-Modified为什么还要Etag？<br>　l. Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间<br>　２. 如果某些文件会被定期生成，当有时内容并没有任何变化，但Last-Modified却改变了，导致文件没法使用缓存<br>　３.有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形</p>
+<p>Etag是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。Last-Modified与ETag是可以一起使用的，服务器会优先验证ETag，一致的情况下，才会继续比对Last-Modified，最后才决定是否返回304。</p>
+<p>###总结###</p>
+<p>浏览器第一次请求：<br><img src="/img/6.1.jpg" alt=""></p>
+<p>浏览器再次请求时：<br><img src="/img/6.2.jpg" alt=""></p>
+<p>参考文章：<br>　　1.作者：吴秦<br>　　 出处：<a href="http://www.cnblogs.com/skynet/" target="_blank" rel="external">http://www.cnblogs.com/skynet/</a><br>　　 2.作者：VaJoy Larn<br>　　 出处：www.cnblogs.com/vajoy/p/5341664.html </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div></div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.jpg" alt="林友钢 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/缓存/" rel="tag"># 缓存</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/25/article7/" rel="next" title="article7">
+                <i class="fa fa-chevron-left"></i> article7
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/05/article5/" rel="prev" title="HTTP协议（转载）">
+                HTTP协议（转载） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
   </div>
 
 
@@ -600,6 +838,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
