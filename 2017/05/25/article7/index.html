@@ -87,21 +87,18 @@
 
 
 
-<meta name="description" content="什么是CSS清除浮动？ 在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。 引用W3C的例子，news容器没有包围浮动的元素。">
+<meta name="description" content="什么是CSS清除浮动? 　　在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。 　　引用W3C的例子，news容器没有包围浮动的元素。">
 <meta name="keywords" content="浮动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS：清除浮动">
 <meta property="og:url" content="http://yoursite.com/2017/05/25/article7/index.html">
 <meta property="og:site_name" content="朝花夕拾">
-<meta property="og:description" content="什么是CSS清除浮动？ 在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。 引用W3C的例子，news容器没有包围浮动的元素。">
+<meta property="og:description" content="什么是CSS清除浮动? 　　在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。 　　引用W3C的例子，news容器没有包围浮动的元素。">
 <meta property="og:image" content="http://yoursite.com/img/7.1.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/25/article7/news-pic.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/25/article7/news-pic.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/25/article7/news-pic.jpg">
-<meta property="og:updated_time" content="2017-05-25T02:40:33.224Z">
+<meta property="og:updated_time" content="2017-05-25T03:15:24.606Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS：清除浮动">
-<meta name="twitter:description" content="什么是CSS清除浮动？ 在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。 引用W3C的例子，news容器没有包围浮动的元素。">
+<meta name="twitter:description" content="什么是CSS清除浮动? 　　在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。 　　引用W3C的例子，news容器没有包围浮动的元素。">
 <meta name="twitter:image" content="http://yoursite.com/img/7.1.jpg">
 
 
@@ -453,73 +450,132 @@
       
 
       
-        <p>什么是CSS清除浮动？</p>
-<p>在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。</p>
-<p>引用W3C的例子，news容器没有包围浮动的元素。<br><a id="more"></a></p>
-<p>   .news {<br>    background-color: gray;<br>    border: solid 1px black;<br>    }<br>    .news img {<br>    float: left;<br>    }<br>    .news p {<br>    float: right;<br>    }</p>
-<pre><code>&lt;div class=&quot;news&quot;&gt;
-&lt;img src=&quot;news-pic.jpg&quot; /&gt;
-&lt;p&gt;some text&lt;/p&gt;
-&lt;/div&gt;
-</code></pre><p><img src="/img/7.1.jpg" alt=""></p>
-<p>清除浮动方法</p>
-<p>方法一：使用带clear属性的空元素</p>
-<p>在浮动元素后使用一个空元素如<div class="clear"></div>，并在CSS中赋予.clear{clear:both;}属性即可清理浮动。亦可使用<br class="clear">或<hr class="clear">来进行清理。</p>
+        <p><strong>什么是CSS清除浮动?</strong></p>
+<p>　　在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。</p>
+<p>　　引用W3C的例子，news容器没有包围浮动的元素。<br><a id="more"></a></p>
 <pre><code>.news {
-background-color: gray;
-border: solid 1px black;
+   background-color: grey;
+   border: solid 1px black;
+ }
+ .new img {
+   float: left;
+ }
+ .new p {
+   float:right;
+ }
+
+ &lt;div class=&quot;news&quot;&gt;
+  &lt;img src=&quot;news-pic.jpg&quot; /&gt;
+  &lt;p&gt;some text&lt;/p&gt;
+</code></pre><p>  <img src="/img/7.1.jpg" alt=""></p>
+<p><strong>清除浮动方法</strong></p>
+<p><strong>方法一：使用带clear属性的空元素</strong></p>
+<p>　　在浮动元素后使用一个空元素如<code>&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;</code>, 并在css中赋予.clear{clear:both;}属性即可清除浮动。亦可使用<code>&lt;br class=&quot;clear /&gt;</code>或<code>&lt;hr class=&quot;clear&quot; /&gt;</code>来清理。</p>
+<pre><code>.news {
+  background-color: gray;
+  border: solid 1px black;
 }
 .news img {
-float: left;
+  float: left;
 }
 .news p {
-float: right;
+  float: right;
 }
 .clear {
-clear: both;
+  clear: both;
 }
 
 &lt;div class=&quot;news&quot;&gt;
-&lt;img src=&quot;news-pic.jpg&quot; /&gt;
-&lt;p&gt;some text&lt;/p&gt;
-&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+  &lt;img src=&quot;news-pic.jpg&quot; /&gt;
+  &lt;p&gt;some text&lt;/p&gt;
+  &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
 </code></pre><p>优点：简单，代码少，浏览器兼容性好。<br>缺点：需要添加大量无语义的html元素，代码不够优雅，后期不容易维护。</p>
-<p>方法二：使用CSS的overflow属性</p>
-<p>给浮动元素的容器添加overflow:hidden;或overflow:auto;可以清除浮动，另外在 IE6 中还需要触发 hasLayout ，例如为父元素设置容器宽高或设置 zoom:1。</p>
-<p>在添加overflow属性后，浮动元素又回到了容器层，把容器高度撑起，达到了清理浮动的效果。</p>
-<p>.news {<br>  background-color: gray;<br>  border: solid 1px black;<br>  overflow: hidden;<br>  *zoom: 1;<br>  }</p>
-<p>.news img {<br>  float: left;<br>  }</p>
-<p>.news p {<br>  float: right;<br>  }</p>
-<div class="news"><br><img src="news-pic.jpg"><br><p>some text</p><br></div>
+<p><strong>方法二：使用CSS的overflow属性</strong></p>
+<p>　　给浮动元素的容器添加overflow:hidden;或overflow:auto;可以清除浮动，另外在 IE6 中还需要触发 hasLayout ，例如为父元素设置容器宽高或设置 zoom:1。</p>
+<p>　　在添加overflow属性后，浮动元素又回到了容器层，把容器高度撑起，达到了清理浮动的效果。</p>
+<pre><code>.news {
+  background-color: gray;
+  border: solid 1px black;
+  overflow: hidden;
+  *zoom: 1; /*IE6中触发 hasLayout*/
+}
+.news img {
+  float: left;
+}
+.news p {
+  float: right;
+}
+.clear {
+  clear: both;
+}
 
-<p>方法三：给浮动的元素的容器添加浮动</p>
-<p>给浮动元素的容器也添加上浮动属性即可清除内部浮动，但是这样会使其整体浮动，影响布局，不推荐使用。</p>
-<p>方法四：使用邻接元素处理</p>
-<p>什么都不做，给浮动元素后面的元素添加clear属性。</p>
-<p>.news {<br>  background-color: gray;<br>  border: solid 1px black;<br>  }</p>
-<p>.news img {<br>  float: left;<br>  }</p>
-<p>.news p {<br>  float: right;<br>  }</p>
-<p>.content{<br>  clear:both;<br>  }</p>
-<div class="news"><br><img src="news-pic.jpg"><br><p>some text</p><br><div class="content"></div><br></div>
+&lt;div class=&quot;news&quot;&gt;
+  &lt;img src=&quot;news-pic.jpg&quot; /&gt;
+  &lt;p&gt;some text&lt;/p&gt;
+  &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p><strong>方法三：给浮动的元素的容器添加浮动</strong></p>
+<p>　　给浮动元素的容器也添加上浮动属性即可清除内部浮动，但是这样会使其整体浮动，影响布局，不推荐使用。</p>
+<p><strong>方法四：使用邻接元素处理</strong></p>
+<p>　　什么都不做，给浮动元素后面的元素添加clear属性。
+　　</p>
+<pre><code>.new{
+   background-color: gray;
+   border: solid 1px black;
+}
+.news img {
+  float: left;
+}
+.news p {
+  float: right;
+}
+.content {
+  clear: both;
+}
 
-<p>方法五：使用CSS的:after伪元素</p>
-<p>结合 :after 伪元素（注意这不是伪类，而是伪元素，代表一个元素之后最近的元素）和 IEhack ，可以完美兼容当前主流的各大浏览器，这里的 IEhack 指的是触发 hasLayout。</p>
-<p>给浮动元素的容器添加一个clearfix的class，然后给这个class添加一个:after伪元素实现元素末尾添加一个看不见的块元素（Block element）清理浮动。</p>
-<p>.news {<br>  background-color: gray;<br>  border: solid 1px black;<br>  }</p>
-<p>.news img {<br>  float: left;<br>  }</p>
-<p>.news p {<br>  float: right;<br>  }</p>
-<p>.clearfix:after{<br>  content: “020”;<br>  display: block;<br>  height: 0;<br>  clear: both;<br>  visibility: hidden;<br>  }</p>
-<p>.clearfix {<br>  /<em> 触发 hasLayout </em>/<br>  zoom: 1;<br>  }</p>
-<p><div class="news clearfix"><br><img src="news-pic.jpg"></div></p>
-<p></p><p>some text</p><br><br>通过CSS伪元素在容器的内部元素最后添加了一个看不见的空格”020”或点”.”，并且赋予clear属性来清除浮动。需要注意的是为了IE6和IE7浏览器，要给clearfix这个class添加一条zoom:1;触发haslayout。<p></p>
-<p>总结</p>
-<p>通过上面的例子，我们不难发现清除浮动的方法可以分成两类：</p>
-<p>一是利用 clear 属性，包括在浮动元素末尾添加一个带有 clear: both 属性的空 div 来闭合元素，其实利用 :after 伪元素的方法也是在元素末尾添加一个内容为一个点并带有 clear: both 属性的元素实现的。</p>
-<p>二是触发浮动元素父元素的 BFC (Block Formatting Contexts, 块级格式化上下文)，使到该父元素可以包含浮动元素，关于这一点。</p>
-<p>推荐</p>
-<p>在网页主要布局时使用:after伪元素方法并作为主要清理浮动方式；在小模块如ul里使用overflow:hidden;（留意可能产生的隐藏溢出元素问题）；如果本身就是浮动元素则可自动清除内部浮动，无需格外处理；正文中使用邻接元素清理之前的浮动。</p>
-<p>最后可以使用相对完美的:after伪元素方法清理浮动，文档结构更加清晰。</p>
+&lt;div class=&quot;news&quot;&gt;
+  &lt;img src=&quot;news-pic.jpg&quot; /&gt;
+  &lt;p&gt;some text&lt;/p&gt;
+  &lt;div class=&quot;content&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p><strong>方法五：使用CSS的:after伪元素</strong></p>
+<p>　　结合 :after 伪元素（注意这不是伪类，而是伪元素，代表一个元素之后最近的元素）和 IEhack ，可以完美兼容当前主流的各大浏览器，这里的 IEhack 指的是触发 hasLayout。</p>
+<p>　　给浮动元素的容器添加一个clearfix的class，然后给这个class添加一个:after伪元素实现元素末尾添加一个看不见的块元素（Block element）清理浮动。</p>
+<pre><code>.new{
+   background-color: gray;
+   border: solid 1px black;
+}
+.news img {
+  float: left;
+}
+.news p {
+  float: right;
+}
+.cleatfix:after {
+  content: &quot;020&quot;;
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  /*触发hasLayout*/
+  zoom: 1;
+  }
+
+&lt;div class=&quot;news&quot;&gt;
+  &lt;img src=&quot;news-pic.jpg&quot; /&gt;
+  &lt;p&gt;some text&lt;/p&gt;
+&lt;/div&gt;
+</code></pre><p> 　　通过CSS伪元素在容器的内部元素最后添加了一个看不见的空格”020”或点”.”，并且赋予clear属性来清除浮动。需要注意的是为了IE6和IE7浏览器，要给clearfix这个class添加一条zoom:1;触发haslayout。</p>
+<p><strong>总结</strong></p>
+<p>　　通过上面的例子，我们不难发现清除浮动的方法可以分成两类：</p>
+<p>　　一是利用 clear 属性，包括在浮动元素末尾添加一个带有 clear: both 属性的空 div 来闭合元素，其实利用 :after 伪元素的方法也是在元素末尾添加一个内容为一个点并带有 clear: both 属性的元素实现的。</p>
+<p>　　二是触发浮动元素父元素的 BFC (Block Formatting Contexts, 块级格式化上下文)，使到该父元素可以包含浮动元素，关于这一点。</p>
+<p><strong>推荐</strong></p>
+<p>　　在网页主要布局时使用:after伪元素方法并作为主要清理浮动方式；在小模块如ul里使用overflow:hidden;（留意可能产生的隐藏溢出元素问题）；如果本身就是浮动元素则可自动清除内部浮动，无需格外处理；正文中使用邻接元素清理之前的浮动。</p>
+<p>　　最后可以使用相对完美的:after伪元素方法清理浮动，文档结构更加清晰</p>
 
       
     </div>
