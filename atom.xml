@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-25T03:15:24.606Z</updated>
+  <updated>2017-05-25T03:19:31.311Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://yoursite.com/2017/05/25/article7/"/>
     <id>http://yoursite.com/2017/05/25/article7/</id>
     <published>2017-05-25T02:33:42.000Z</published>
-    <updated>2017-05-25T03:15:24.606Z</updated>
+    <updated>2017-05-25T03:19:31.311Z</updated>
     
-    <content type="html"><![CDATA[<p><strong>什么是CSS清除浮动?</strong></p>
+    <content type="html"><![CDATA[<p>（注：本文转自Terry Chen博客，这是[原文链接][1]）</p>
+<p><strong>什么是CSS清除浮动?</strong></p>
 <p>　　在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。</p>
 <p>　　引用W3C的例子，news容器没有包围浮动的元素。<br><a id="more"></a></p>
 <pre><code>.news {
@@ -152,7 +153,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;strong&gt;什么是CSS清除浮动?&lt;/strong&gt;&lt;/p&gt;
+      &lt;p&gt;（注：本文转自Terry Chen博客，这是[原文链接][1]）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;什么是CSS清除浮动?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;　　在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。&lt;/p&gt;
 &lt;p&gt;　　引用W3C的例子，news容器没有包围浮动的元素。&lt;br&gt;
     
